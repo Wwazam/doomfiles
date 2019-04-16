@@ -2,12 +2,22 @@
 
 
 ;;
+;; Graphic
+;; ;; Theme
+
+(load-theme 'hc-zenburn t)
+
+;;
 ;; Evil
 ;; ;; jk to Normal Mode
 (setq-default evil-escape-key-sequence "jk")
 (setq-default evil-escape-unordered-key-sequence "jk")
 (setq-default evil-escape-delay 0.5)
 
+;;
+;; ;; Holy mode by default
+(add-hook 'org-agenda-mode-hook 'evil-emacs-state)
+(add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
 
 ;;
 ;; Navigation
@@ -16,6 +26,7 @@
 (define-key evil-normal-state-map (kbd "C-.") 'avy-goto-word-or-subword-1)
 (define-key evil-visual-state-map (kbd "C-.") 'avy-goto-word-or-subword-1)
 (define-key evil-motion-state-map (kbd "C-.") 'avy-goto-word-or-subword-1)
+(setq avy-all-windows t)
 
 
 ;;
@@ -54,7 +65,6 @@
 
 ;;
 ;; ;; Agenda
-(setq org-agenda-start-day "+0d")
 (global-set-key (kbd "C-c a") 'org-agenda)
 (defun my/org-agenda-skip-without-match (match)
 "Skip current headline unless it matches MATCH.
@@ -103,6 +113,7 @@ skip exactly those headlines that do not match."
         ))
         )
 )
+(setq org-agenda-start-day "+0d")
 
 ;;
 ;; ;; Capture templates
@@ -123,4 +134,5 @@ skip exactly those headlines that do not match."
         "* %?\n")
         ("j" "Journal" entry (file+datetree "~/documents/notes/journal.org")
         "* %?\n")
-        ))
+        )
+    )
