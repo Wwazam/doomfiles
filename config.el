@@ -117,7 +117,6 @@ skip exactly those headlines that do not match."
 
 ;;
 ;; ;; Capture templates
-(setq org-defaults-notes-file "~/documents/notes/notes.org")
 (setq org-capture-templates
     '(
         ("h" "Home" entry (file "~/documents/notes/inbox.org")
@@ -136,3 +135,4 @@ skip exactly those headlines that do not match."
         "* %?\n")
         )
     )
+(setq org-defaults-notes-file "~/documents/notes/notes.org")
