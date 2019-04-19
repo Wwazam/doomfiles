@@ -95,6 +95,7 @@ skip exactly those headlines that do not match."
         )
         nil                      ;; i.e., no local settings
         ("~/next-actions.html")) ;; exports block to this file with C-c a e
+        ("x" "Missing scheduled date" tags-todo "+DEADLINE=\"\"+SCHEDULED=\"\"/!")
 
         ("d" . "Day")
         ("dd" "Day" agenda "All the events, not filtered"
