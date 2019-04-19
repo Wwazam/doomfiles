@@ -101,15 +101,18 @@ skip exactly those headlines that do not match."
         ("dd" "Day" agenda "All the events, not filtered"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
+        (org-agenda-start-day "+0d")
         ))
         ("dw" "Work" agenda "Events tagged 'work' and 'meeting'"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
+        (org-agenda-start-day "+0d")
         (org-agenda-tag-filter-preset '("+work"))
         ))
         ("dp" "Personnal" agenda "Events tagged 'work', 'errands', 'meeting' and 'computer'"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
+        (org-agenda-start-day "+0d")
         (org-agenda-tag-filter-preset '("-work"))
         ))
         )
