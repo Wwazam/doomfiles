@@ -7,4 +7,3 @@
 ;; (package! builtin-package :disable t)
 
 (package! hc-zenburn-theme)
-(package! golden-ratio-mode)
