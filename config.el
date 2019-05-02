@@ -140,3 +140,7 @@ skip exactly those headlines that do not match."
         )
     )
 (setq org-defaults-notes-file "~/documents/notes/notes.org")
+
+;;
+;; ;; web
+(add-to-list 'auto-mode-alist '("\\.djhtml$" . web-mode))
