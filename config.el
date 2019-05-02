@@ -101,15 +101,18 @@ skip exactly those headlines that do not match."
         ("dd" "Day" agenda "All the events, not filtered"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
+        (org-agenda-start-day "+0d")
         ))
         ("dw" "Work" agenda "Events tagged 'work' and 'meeting'"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
+        (org-agenda-start-day "+0d")
         (org-agenda-tag-filter-preset '("+work"))
         ))
         ("dp" "Personnal" agenda "Events tagged 'work', 'errands', 'meeting' and 'computer'"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
+        (org-agenda-start-day "+0d")
         (org-agenda-tag-filter-preset '("-work"))
         ))
         )
@@ -130,10 +133,14 @@ skip exactly those headlines that do not match."
         "* TODO %?   :computer:\n %i\n\n")
         ("m" "Meeting" entry (file "~/documents/notes/inbox.org")
         "* TODO %?   :meeting:\n %i\n\n")
-        ("d" "Diary" entry (file+datetree "~/documents/notes/diary.org")
+        ("d" "Diary" entry (file+olp+datetree "~/documents/notes/diary.org")
         "* %?\n")
-        ("j" "Journal" entry (file+datetree "~/documents/notes/journal.org")
+        ("j" "Journal" entry (file+olp+datetree "~/documents/notes/journal.org")
         "* %?\n")
         )
     )
 (setq org-defaults-notes-file "~/documents/notes/notes.org")
+
+;;
+;; ;; web
+(add-to-list 'auto-mode-alist '("\\.djhtml$" . web-mode))
