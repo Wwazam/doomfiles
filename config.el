@@ -32,7 +32,7 @@
 ;;
 ;; Org
 ;; ;; Directory
-(setq org-directory '~/documents/notes/)
+(setq org-directory "~/documents/notes/")
 
 ;; ;; Bullets
 (setq org-bullets-fac-name (quote org-bullet-face))
