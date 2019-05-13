@@ -144,3 +144,24 @@ skip exactly those headlines that do not match."
 ;;
 ;; ;; web
 (add-to-list 'auto-mode-alist '("\\.djhtml$" . web-mode))
+
+;;
+;; ;; Expand key
+
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-insert-state-map))
+          (define-key (eval map) "\C-n" nil)))
+(define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
+(setq-default
+ hippie-expand-try-functions-list '(
+                                    yas-hippie-try-expand
+                                    try-complete-file-name-partially
+                                    try-complete-file-name
+                                    try-expand-all-abbrevs
+                                    try-expand-list
+                                    try-expand-line
+                                    try-expand-dabbrev
+                                    try-expand-dabbrev-all-buffers
+                                    try-expand-dabbrev-from-kill
+                                    try-complete-lisp-symbol-partially
+                                    try-complete-lisp-symbol))
