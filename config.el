@@ -43,7 +43,6 @@
 (set-display-table-slot standard-display-table
     'selective-display (string-to-vector " …")) ; or whatever you like
 
-;;
 ;; ;; TO DO keywords
 (with-eval-after-load 'org
 (setq org-todo-keywords
@@ -63,7 +62,6 @@
 (setq org-log-into-drawer t)
 )
 
-;;
 ;; ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 (defun my/org-agenda-skip-without-match (match)
@@ -119,7 +117,6 @@ skip exactly those headlines that do not match."
 )
 (setq org-agenda-start-day "+0d")
 
-;;
 ;; ;; Capture templates
 (setq org-capture-templates
     '(
@@ -140,6 +137,18 @@ skip exactly those headlines that do not match."
         )
     )
 (setq org-defaults-notes-file "~/documents/notes/notes.org")
+
+;; ;; Babel
+
+(setq org-confirm-babel-evaluate nil)
+
+(org-babel-do-load-languages
+    'org-babel-load-languages
+    '( (python  . t)
+    (plantuml . t)
+    (emacs-lisp . t)
+    (C . t)
+    ))
 
 ;;
 ;; ;; web
@@ -164,4 +173,5 @@ skip exactly those headlines that do not match."
                                     try-expand-dabbrev-all-buffers
                                     try-expand-dabbrev-from-kill
                                     try-complete-lisp-symbol-partially
-                                    try-complete-lisp-symbol))
+                                    try-complete-lisp-symbol
+                                    ))
