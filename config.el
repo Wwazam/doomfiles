@@ -175,3 +175,11 @@ skip exactly those headlines that do not match."
                                     try-complete-lisp-symbol-partially
                                     try-complete-lisp-symbol
                                     ))
+
+
+;;
+;; ;;
+(map!
+   (:map override :i "C-k" #'evil-insert-digraph
+     )
+  )
