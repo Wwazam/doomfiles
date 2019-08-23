@@ -129,7 +129,7 @@ skip exactly those headlines that do not match."
         ("c" "Computer" entry (file "~/documents/notes/inbox.org")
         "* TODO %?   :computer:\n %i\n\n")
         ("m" "Meeting" entry (file "~/documents/notes/inbox.org")
-        "* TODO %?   :meeting:\n %i\n\n")
+        "* %?   :meeting:\n %i\n\n")
         ("d" "Diary" entry (file+olp+datetree "~/documents/notes/diary.org")
         "* %?\n")
         ("j" "Journal" entry (file+olp+datetree "~/documents/notes/journal.org")
@@ -137,6 +137,7 @@ skip exactly those headlines that do not match."
         )
     )
 (setq org-defaults-notes-file "~/documents/notes/notes.org")
+(global-set-key (kbd "C-c c") 'org-capture)
 
 ;; ;; Babel
 
