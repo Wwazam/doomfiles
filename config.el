@@ -58,7 +58,8 @@
         ("ISSUE" .(:foreground "#dfaf8f"))
         ("CANCELED" .(:foreground "#7f9f7f"))
 ))
-
+(setq visual-line-mode 1)
+(setq auto-fill-mode 0)
 (setq org-log-into-drawer t)
 )
 
@@ -183,3 +184,5 @@ skip exactly those headlines that do not match."
    (:map override :i "C-k" #'evil-insert-digraph
      )
   )
+
+(setq doom-font (font-spec :family "Inconsolata" :size 16))
