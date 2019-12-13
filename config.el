@@ -5,7 +5,13 @@
 ;; Graphic
 ;; ;; Theme
 
-(load-theme 'hc-zenburn t)
+;; (load-theme 'hc-zenburn t)
+(load-theme 'doom-Iosvkem t)
+
+
+;; ;; Auto fill mode
+
+(setq auto-fill-mode -1)
 
 ;;
 ;; Evil
@@ -29,6 +35,10 @@
 (setq avy-all-windows t)
 
 
+;; ;; maximize windows
+
+(define-key evil-window-map (kbd "C-o") 'doom/window-maximize-buffer)
+
 ;;
 ;; Org
 ;; ;; Directory
@@ -42,6 +52,10 @@
 ;(setq org-ellipsis " ▼")
 (set-display-table-slot standard-display-table
     'selective-display (string-to-vector " …")) ; or whatever you like
+
+;; remove auto fill mode
+
+(remove-hook 'org-mode-hook #'turn-on-auto-fill)
 
 ;; ;; TO DO keywords
 (with-eval-after-load 'org
@@ -58,8 +72,8 @@
         ("ISSUE" .(:foreground "#dfaf8f"))
         ("CANCELED" .(:foreground "#7f9f7f"))
 ))
+(setq auto-fill-mode -1)
 (setq visual-line-mode 1)
-(setq auto-fill-mode 0)
 (setq org-log-into-drawer t)
 )
 
@@ -97,7 +111,7 @@ skip exactly those headlines that do not match."
         ("x" "Missing scheduled date" tags-todo "+DEADLINE=\"\"+SCHEDULED=\"\"/!")
 
         ("d" . "Day")
-        ("dd" "Day" agenda "All the events, not filtered"
+        ("dd" "Day" agenda "All events, not filtered"
         ((org-agenda-span 1)
         (org-agenda-start-on-weekday nil)
         (org-agenda-start-day "+0d")
@@ -119,26 +133,27 @@ skip exactly those headlines that do not match."
 (setq org-agenda-start-day "+0d")
 
 ;; ;; Capture templates
-(setq org-capture-templates
-    '(
-        ("h" "Home" entry (file "~/documents/notes/inbox.org")
-        "* TODO %?   :home:\n %i\n\n")
-        ("w" "Work" entry (file "~/documents/notes/inbox.org")
-        "* TODO %?   :work:\n %i\n\n")
-        ("e" "Errand" entry (file "~/documents/notes/inbox.org")
-        "* TODO %?   :errand:\n %i\n\n")
-        ("c" "Computer" entry (file "~/documents/notes/inbox.org")
-        "* TODO %?   :computer:\n %i\n\n")
-        ("m" "Meeting" entry (file "~/documents/notes/inbox.org")
-        "* %?   :meeting:\n %i\n\n")
-        ("d" "Diary" entry (file+olp+datetree "~/documents/notes/diary.org")
-        "* %?\n")
-        ("j" "Journal" entry (file+olp+datetree "~/documents/notes/journal.org")
-        "* %?\n")
-        )
-    )
-(setq org-defaults-notes-file "~/documents/notes/notes.org")
 (global-set-key (kbd "C-c c") 'org-capture)
+(after! org
+  (setq org-capture-templates
+      '(
+          ("h" "Home" entry (file "~/documents/notes/inbox.org")
+          "* TODO %?   :home:\n %i\n\n")
+          ("w" "Work" entry (file "~/documents/notes/inbox.org")
+          "* TODO %?   :work:\n %i\n\n")
+          ("e" "Errand" entry (file "~/documents/notes/inbox.org")
+          "* TODO %?   :errand:\n %i\n\n")
+          ("c" "Computer" entry (file "~/documents/notes/inbox.org")
+          "* TODO %?   :computer:\n %i\n\n")
+          ("m" "Meeting" entry (file "~/documents/notes/inbox.org")
+          "* %?   :meeting:\n %i\n\n")
+          ("d" "Diary" entry (file+olp+datetree "~/documents/notes/diary.org")
+          "* %?\n")
+          ("j" "Journal" entry (file+olp+datetree "~/documents/notes/journal.org")
+          "* %?\n")
+          )
+  ))
+(setq org-defaults-notes-file "~/documents/notes/notes.org")
 
 ;; ;; Babel
 
@@ -170,14 +185,13 @@ skip exactly those headlines that do not match."
                                     try-complete-file-name
                                     try-expand-all-abbrevs
                                     try-expand-list
-                                    try-expand-line
+                                    ;; try-expand-line
                                     try-expand-dabbrev
                                     try-expand-dabbrev-all-buffers
                                     try-expand-dabbrev-from-kill
                                     try-complete-lisp-symbol-partially
                                     try-complete-lisp-symbol
                                     ))
-
 
 ;;
 ;; ;;
@@ -186,4 +200,21 @@ skip exactly those headlines that do not match."
      )
   )
 
-(setq doom-font (font-spec :family "Inconsolata" :size 16))
+(setq doom-font (font-spec :family "Inconsolata" :size 14))
+
+;;
+;; Elfeed
+;; ;;
+
+;; (map! 'evil-normal-state-map
+;;       :localleader
+;;       :prefix "f"
+;;         :desc "Elfeed" "f" #'elfeed
+
+;; )
+
+;; (!map
+;;  :leader
+;;    :prefix "Z"
+;;      :desc "Kill buffer" "d" #'kill-this-buffer
+;;    )
