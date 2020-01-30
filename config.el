@@ -11,6 +11,7 @@
 ;; (load-theme 'doom-horizon t)
 (load-theme 'doom-material t)
 
+; test revert
 
 
 ;; ;; Auto fill mode
