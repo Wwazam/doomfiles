@@ -42,10 +42,13 @@
 
        :editor
        fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
+       (
+        format
+        ;; +onsave
+        )  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
-       ;;parinfer          ; turn lisp into python, sort of
+       parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
 
        :emacs
