@@ -11,7 +11,6 @@
 ;; (load-theme 'doom-horizon t)
 (load-theme 'doom-material t)
 
-; test revert
 
 
 ;; ;; Auto fill mode
@@ -56,39 +55,31 @@
 
 ;(setq org-ellipsis " ▼")
 (set-display-table-slot standard-display-table
-                        'selective-display (string-to-vector " …")) ; or whatever you like
+    'selective-display (string-to-vector " …")) ; or whatever you like
 
 ;; remove auto fill mode
-(after! org
-  (remove-hook 'org-mode-hook #'turn-on-auto-fill)
-  (remove-hook 'text-mode-hook #'turn-on-auto-fill)
-  (add-hook 'org-mode-hook #'visual-line-mode)
-  (add-hook 'text-mode-hook #'visual-line-mode)
-  )
+
+(remove-hook 'org-mode-hook #'turn-on-auto-fill)
 
 ;; ;; TO DO keywords
 (with-eval-after-load 'org
-  (setq org-todo-keywords
-        '((sequence "TODO(t!)" "WAIT(w!@)" "|" "DONE(d!)" )
-          (sequence "ISSUE(i@!)" "|" "LATER(l!)" "CANCELED(a@!)")
-          ))
+(setq org-todo-keywords
+    '((sequence "TODO(t)" "WAIT(w@)" "|" "DONE(d!)" )
+    (sequence "ISSUE(i@)" "|" "LATER(l)" "CANCELED(a@)")
+))
 
-  (setq org-todo-keywords
-        '((sequence "TODO(t!)" "WAIT(w!@)" "|" "DONE(d!)" )
-          (sequence "ISSUE(i@!)" "|" "LATER(l!)" "CANCELED(a@!)")
-          ))
-
-  (setq org-todo-keyword-faces
-        '(
-          ("TODO" .(:foreground "#bc8383" :weight bold))
-          ("DONE" .(:foreground "#94bff3"))
-          ("WAIT" .(:foreground "#ebe9bf"))
-          ("ISSUE" .(:foreground "#dfaf8f"))
-          ("CANCELED" .(:foreground "#7f9f7f"))
-          ))
-  (setq auto-fill-mode -1)
-  (setq org-log-into-drawer t)
-  )
+(setq org-todo-keyword-faces
+    '(
+        ("TODO" .(:foreground "#bc8383" :weight bold))
+        ("DONE" .(:foreground "#94bff3"))
+        ("WAIT" .(:foreground "#ebe9bf"))
+        ("ISSUE" .(:foreground "#dfaf8f"))
+        ("CANCELED" .(:foreground "#7f9f7f"))
+))
+(setq auto-fill-mode -1)
+(setq visual-line-mode 1)
+(setq org-log-into-drawer t)
+)
 
 ;; ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -183,6 +174,7 @@ skip exactly those headlines that do not match."
 ;;
 ;; ;; web
 (add-to-list 'auto-mode-alist '("\\.djhtml$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
 
 ;;
 ;; ;; Expand key

@@ -42,8 +42,7 @@
 
        :editor
        fold              ; (nigh) universal code folding
-       (
-        format
+       (format
         ;; +onsave
         )  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
