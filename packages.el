@@ -9,3 +9,5 @@
 (package! color-theme-sanityinc-tomorrow-theme)
 (package! hc-zenburn-theme)
 (package! async)
+
+(package! exec-path-from-shell)

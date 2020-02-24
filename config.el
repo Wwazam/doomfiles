@@ -10,6 +10,8 @@
 ;; (load-theme 'doom-molokai t)
 ;; (load-theme 'doom-horizon t)
 (load-theme 'doom-material t)
+;; (load-theme 'doom-gruvbox t)
+;; (load-theme 'doom-nord t)
 
 
 
@@ -53,9 +55,9 @@
 (add-hook 'org-mode-hook (lambda ()(org-bullets-mode 1)))
 (setq org-bullets-bullet-list '("·"))
 
-;(setq org-ellipsis " ▼")
+                                        ;(setq org-ellipsis " ▼")
 (set-display-table-slot standard-display-table
-    'selective-display (string-to-vector " …")) ; or whatever you like
+                        'selective-display (string-to-vector " …")) ; or whatever you like
 
 ;; remove auto fill mode
 
@@ -63,100 +65,100 @@
 
 ;; ;; TO DO keywords
 (with-eval-after-load 'org
-(setq org-todo-keywords
-    '((sequence "TODO(t)" "WAIT(w@)" "|" "DONE(d!)" )
-    (sequence "ISSUE(i@)" "|" "LATER(l)" "CANCELED(a@)")
-))
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAIT(w@)" "|" "DONE(d!)" )
+          (sequence "ISSUE(i@)" "|" "LATER(l)" "CANCELED(a@)")
+          ))
 
-(setq org-todo-keyword-faces
-    '(
-        ("TODO" .(:foreground "#bc8383" :weight bold))
-        ("DONE" .(:foreground "#94bff3"))
-        ("WAIT" .(:foreground "#ebe9bf"))
-        ("ISSUE" .(:foreground "#dfaf8f"))
-        ("CANCELED" .(:foreground "#7f9f7f"))
-))
-(setq auto-fill-mode -1)
-(setq visual-line-mode 1)
-(setq org-log-into-drawer t)
-)
+  (setq org-todo-keyword-faces
+        '(
+          ("TODO" .(:foreground "#bc8383" :weight bold))
+          ("DONE" .(:foreground "#94bff3"))
+          ("WAIT" .(:foreground "#ebe9bf"))
+          ("ISSUE" .(:foreground "#dfaf8f"))
+          ("CANCELED" .(:foreground "#7f9f7f"))
+          ))
+  (setq auto-fill-mode -1)
+  (setq visual-line-mode 1)
+  (setq org-log-into-drawer t)
+  )
 
 ;; ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 (defun my/org-agenda-skip-without-match (match)
-"Skip current headline unless it matches MATCH.
+  "Skip current headline unless it matches MATCH.
 Return nil if headline containing point matches MATCH (which
 should be a match string of the same format used by
 `org-tags-view').  If headline does not match, return the
 position of the next headline in current buffer.
 Intended for use with `org-agenda-skip-function', where this will
 skip exactly those headlines that do not match."
-(save-excursion
+  (save-excursion
     (unless (org-at-heading-p) (org-back-to-heading))
     (let ((next-headline (save-excursion
-                            (or (outline-next-heading) (point-max)))))
-    (if (my/org-match-at-point-p match) nil next-headline))))
+                           (or (outline-next-heading) (point-max)))))
+      (if (my/org-match-at-point-p match) nil next-headline))))
 (setq org-agenda-custom-commands
-    '(("G" . "GTD contexts")
+      '(("G" . "GTD contexts")
         ("Gw" "Work" tags-todo "work")
         ("Gc" "Computer" tags-todo "computer")
         ("Gm" "Meeting" tags-todo "meeting")
         ("Gh" "Home" tags-todo "home")
         ("Ge" "Errands" tags-todo "errands")
         ("g" "GTD Block Agenda"
-        (
-        (tags-todo "work")
-        (tags-todo "home")
-        (tags-todo "computer")
-        (tags-todo "errands")
-        )
-        nil                      ;; i.e., no local settings
-        ("~/next-actions.html")) ;; exports block to this file with C-c a e
+         (
+          (tags-todo "work")
+          (tags-todo "home")
+          (tags-todo "computer")
+          (tags-todo "errands")
+          )
+         nil                      ;; i.e., no local settings
+         ("~/next-actions.html")) ;; exports block to this file with C-c a e
         ("x" "Missing scheduled date" tags-todo "+DEADLINE=\"\"+SCHEDULED=\"\"/!")
 
         ("d" . "Day")
         ("dd" "Day" agenda "All events, not filtered"
-        ((org-agenda-span 1)
-        (org-agenda-start-on-weekday nil)
-        (org-agenda-start-day "+0d")
-        ))
+         ((org-agenda-span 1)
+          (org-agenda-start-on-weekday nil)
+          (org-agenda-start-day "+0d")
+          ))
         ("dw" "Work" agenda "Events tagged 'work' and 'meeting'"
-        ((org-agenda-span 1)
-        (org-agenda-start-on-weekday nil)
-        (org-agenda-start-day "+0d")
-        (org-agenda-tag-filter-preset '("+work"))
-        ))
+         ((org-agenda-span 1)
+          (org-agenda-start-on-weekday nil)
+          (org-agenda-start-day "+0d")
+          (org-agenda-tag-filter-preset '("+work"))
+          ))
         ("dp" "Personnal" agenda "Events tagged 'work', 'errands', 'meeting' and 'computer'"
-        ((org-agenda-span 1)
-        (org-agenda-start-on-weekday nil)
-        (org-agenda-start-day "+0d")
-        (org-agenda-tag-filter-preset '("-work"))
-        ))
+         ((org-agenda-span 1)
+          (org-agenda-start-on-weekday nil)
+          (org-agenda-start-day "+0d")
+          (org-agenda-tag-filter-preset '("-work"))
+          ))
         )
-)
+      )
 (setq org-agenda-start-day "+0d")
 
 ;; ;; Capture templates
 (global-set-key (kbd "C-c c") 'org-capture)
 (after! org
   (setq org-capture-templates
-      '(
+        '(
           ("h" "Home" entry (file "~/documents/notes/inbox.org")
-          "* TODO %?   :home:\n %i\n\n")
+           "* TODO %?   :home:\n %i\n\n")
           ("w" "Work" entry (file "~/documents/notes/inbox.org")
-          "* TODO %?   :work:\n %i\n\n")
+           "* TODO %?   :work:\n %i\n\n")
           ("e" "Errand" entry (file "~/documents/notes/inbox.org")
-          "* TODO %?   :errand:\n %i\n\n")
+           "* TODO %?   :errand:\n %i\n\n")
           ("c" "Computer" entry (file "~/documents/notes/inbox.org")
-          "* TODO %?   :computer:\n %i\n\n")
+           "* TODO %?   :computer:\n %i\n\n")
           ("m" "Meeting" entry (file "~/documents/notes/inbox.org")
-          "* %?   :meeting:\n %i\n\n")
+           "* %?   :meeting:\n %i\n\n")
           ("d" "Diary" entry (file+olp+datetree "~/documents/notes/diary.org")
-          "* %?\n")
+           "* %?\n")
           ("j" "Journal" entry (file+olp+datetree "~/documents/notes/journal.org")
-          "* %?\n")
+           "* %?\n")
           )
-  ))
+        ))
 (setq org-defaults-notes-file "~/documents/notes/notes.org")
 
 ;; ;; Babel
@@ -164,8 +166,8 @@ skip exactly those headlines that do not match."
 (setq org-confirm-babel-evaluate nil)
 
 (org-babel-do-load-languages
-    'org-babel-load-languages
-    '( (python  . t)
+ 'org-babel-load-languages
+ '( (python  . t)
     (plantuml . t)
     (emacs-lisp . t)
     (C . t)
@@ -181,7 +183,7 @@ skip exactly those headlines that do not match."
 
 (eval-after-load "evil-maps"
   (dolist (map '(evil-insert-state-map))
-          (define-key (eval map) "\C-n" nil)))
+    (define-key (eval map) "\C-n" nil)))
 (define-key evil-insert-state-map (kbd "C-n") 'hippie-expand)
 (setq-default
  hippie-expand-try-functions-list '(
@@ -201,11 +203,11 @@ skip exactly those headlines that do not match."
 ;;
 ;; ;;
 (map!
-   (:map override :i "C-k" #'evil-insert-digraph
-     )
-  )
+ (:map override :i "C-k" #'evil-insert-digraph))
 
-(setq doom-font (font-spec :family "Inconsolata" :size 14))
+
+
+(setq doom-font (font-spec :family "hack" :size 14))
 
 ;;
 ;; Elfeed
@@ -223,3 +225,8 @@ skip exactly those headlines that do not match."
 ;;    :prefix "Z"
 ;;      :desc "Kill buffer" "d" #'kill-this-buffer
 ;;    )
+
+;;
+;; SSH Agent
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
