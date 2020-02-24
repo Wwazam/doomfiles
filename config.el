@@ -5,16 +5,22 @@
 ;; Graphic
 ;; ;; Theme
 
-;; (load-theme 'hc-zenburn t)
-;; (load-theme 'doom-Iosvkem t)
-;; (load-theme 'doom-molokai t)
-;; (load-theme 'doom-horizon t)
-(load-theme 'doom-material t)
-;; (load-theme 'doom-gruvbox t)
-;; (load-theme 'doom-nord t)
 
+(setq theme-list '(
+                   hc-zenburn
+                   doom-Iosvkem
+                   doom-horizon
+                   doom-material
+                   doom-gruvbox
+                   doom-nord
+                   ))
 
+(defun random-theme ()
+  (interactive)
+  (random t)  ; randomazing
+  (load-theme (nth (random (length theme-list)) theme-list) t))
 
+(random-theme)
 ;; ;; Auto fill mode
 
 (setq auto-fill-mode -1)
@@ -48,7 +54,7 @@
 ;;
 ;; Org
 ;; ;; Directory
-(setq org-directory "~/documents/notes/")
+(setq org-directory "~/documents/notes/orgFiles/")
 
 ;; ;; Bullets
 (setq org-bullets-fac-name (quote org-bullet-face))
@@ -159,7 +165,7 @@ skip exactly those headlines that do not match."
            "* %?\n")
           )
         ))
-(setq org-defaults-notes-file "~/documents/notes/notes.org")
+(setq org-defaults-notes-file "~/documents/notes/orgFiles/inbox.org")
 
 ;; ;; Babel
 
@@ -230,3 +236,8 @@ skip exactly those headlines that do not match."
 ;; SSH Agent
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
+;;
+;; Deft
+
+(setq deft-directory "~/documents/notes/orgFiles/")
