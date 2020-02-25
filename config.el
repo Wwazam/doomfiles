@@ -8,11 +8,19 @@
 
 (setq theme-list '(
                    hc-zenburn
-                   doom-Iosvkem
-                   doom-horizon
                    doom-material
                    doom-gruvbox
                    doom-nord
+                   doom-spacegrey
+                   spacemacs-dark
+                   sanityinc-tomorrow-night
+                   brin
+                   dorsey
+                   junio
+                   odersky
+                   ample
+                   darktooth
+                   jazz
                    ))
 
 (defun random-theme ()
@@ -241,3 +249,9 @@ skip exactly those headlines that do not match."
 ;; Deft
 
 (setq deft-directory "~/documents/notes/orgFiles/")
+(add-hook! 'deft-mode-hook 'evil-normal-state)
+
+;;
+;; php
+(setq! lsp-clients-php-server-command
+       (expand-file-name "~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
