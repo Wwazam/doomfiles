@@ -14,7 +14,6 @@
                    doom-spacegrey
                    spacemacs-dark
                    sanityinc-tomorrow-night
-                   brin
                    dorsey
                    junio
                    odersky
@@ -36,7 +35,6 @@
 ;;
 ;; Evil
 ;; ;; jk to Normal Mode
-(setq-default evil-escape-key-sequence "jk")
 (setq-default evil-escape-unordered-key-sequence "jk")
 (setq-default evil-escape-delay 0.5)
 
