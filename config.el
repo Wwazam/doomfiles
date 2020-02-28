@@ -9,10 +9,6 @@
 (load-theme 'doom-Iosvkem t)
 
 
-;; ;; Auto fill mode
-
-(setq auto-fill-mode -1)
-
 ;;
 ;; Evil
 ;; ;; jk to Normal Mode
@@ -55,7 +51,10 @@
 
 ;; remove auto fill mode
 
-(remove-hook 'org-mode-hook #'turn-on-auto-fill)
+(remove-hook 'text-mode-hook #'auto-fill-mode)
+(remove-hook 'org-mode-hook #'auto-fill-mode)
+(add-hook 'text-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook #'visual-line-mode)
 
 ;; ;; TO DO keywords
 (with-eval-after-load 'org
@@ -72,7 +71,6 @@
         ("ISSUE" .(:foreground "#dfaf8f"))
         ("CANCELED" .(:foreground "#7f9f7f"))
 ))
-(setq auto-fill-mode -1)
 (setq visual-line-mode 1)
 (setq org-log-into-drawer t)
 )
@@ -200,7 +198,7 @@ skip exactly those headlines that do not match."
      )
   )
 
-(setq doom-font (font-spec :family "Inconsolata" :size 14))
+(setq doom-font (font-spec :family "Hack" :size 12))
 
 ;;
 ;; Elfeed
