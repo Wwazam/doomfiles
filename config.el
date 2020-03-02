@@ -21,7 +21,7 @@
                    jazz
                    subatomic
                    badwolf
-                   vscdark-theme
+                   vscdark
                    ))
 
 
@@ -160,19 +160,19 @@ skip exactly those headlines that do not match."
 (after! org
   (setq org-capture-templates
         '(
-          ("h" "Home" entry (file "~/documents/notes/inbox.org")
+          ("h" "Home" entry (file "~/documents/notes/orgFiles/inbox.org")
            "* TODO %?   :home:\n %i\n\n")
-          ("w" "Work" entry (file "~/documents/notes/inbox.org")
+          ("w" "Work" entry (file "~/documents/notes/orgFiles/inbox.org")
            "* TODO %?   :work:\n %i\n\n")
-          ("e" "Errand" entry (file "~/documents/notes/inbox.org")
+          ("e" "Errand" entry (file "~/documents/notes/orgFiles/inbox.org")
            "* TODO %?   :errand:\n %i\n\n")
-          ("c" "Computer" entry (file "~/documents/notes/inbox.org")
+          ("c" "Computer" entry (file "~/documents/notes/orgFiles/inbox.org")
            "* TODO %?   :computer:\n %i\n\n")
-          ("m" "Meeting" entry (file "~/documents/notes/inbox.org")
+          ("m" "Meeting" entry (file "~/documents/notes/orgFiles/inbox.org")
            "* %?   :meeting:\n %i\n\n")
-          ("d" "Diary" entry (file+olp+datetree "~/documents/notes/diary.org")
+          ("d" "Diary" entry (file+olp+datetree "~/documents/notes/orgFiles/diary.org")
            "* %?\n")
-          ("j" "Journal" entry (file+olp+datetree "~/documents/notes/journal.org")
+          ("j" "Journal" entry (file+olp+datetree "~/documents/notes/orgFiles/journal.org")
            "* %?\n")
           )
         ))
