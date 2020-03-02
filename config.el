@@ -76,7 +76,10 @@
 
 ;; remove auto fill mode
 
-(remove-hook 'org-mode-hook #'turn-on-auto-fill)
+(remove-hook 'text-mode-hook #'auto-fill-mode)
+(remove-hook 'org-mode-hook #'auto-fill-mode)
+(add-hook 'text-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook #'visual-line-mode)
 
 ;; ;; TO DO keywords
 (with-eval-after-load 'org
@@ -95,8 +98,7 @@
           ))
   (setq auto-fill-mode -1)
   (setq visual-line-mode 1)
-  (setq org-log-into-drawer t)
-  )
+  (setq org-log-into-drawer t))
 
 ;; ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -219,8 +221,6 @@ skip exactly those headlines that do not match."
 ;; ;;
 (map!
  (:map override :i "C-k" #'evil-insert-digraph))
-
-
 
 (setq doom-font (font-spec :family "hack" :size 14))
 
