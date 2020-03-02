@@ -17,10 +17,13 @@
                    dorsey
                    junio
                    odersky
-                   ample
                    darktooth
                    jazz
+                   subatomic
+                   badwolf
+                   vscdark-theme
                    ))
+
 
 (defun random-theme ()
   (interactive)

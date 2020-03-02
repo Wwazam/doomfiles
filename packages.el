@@ -17,3 +17,6 @@
 (package! sublime-themes)
 (package! darktooth-theme)
 (package! jazz-theme)
+(package! subatomic-theme)
+(package! badwolf-theme)
+(package! vscdark-theme)
