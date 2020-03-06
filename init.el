@@ -76,8 +76,8 @@
        :term
        ;;eshell            ; a consistent, cross-platform shell (WIP)
        shell             ; a terminal REPL for Emacs
-       term              ; terminals in Emacs
-       ;;vterm             ; another terminals in Emacs
+       ;; term              ; terminals in Emacs
+       vterm             ; another terminals in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -99,7 +99,7 @@
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
-       ;;pass              ; password manager for nerds
+       pass              ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
@@ -158,7 +158,10 @@
        ;;racket            ; a DSL for DSLs
        rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
-       (ruby +lsp)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       (ruby
+        +lsp
+        +rails
+        )              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps

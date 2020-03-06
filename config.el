@@ -31,9 +31,6 @@
   (load-theme (nth (random (length theme-list)) theme-list) t))
 
 (random-theme)
-;; ;; Auto fill mode
-
-(setq auto-fill-mode -1)
 
 ;;
 ;; Evil
@@ -45,6 +42,9 @@
 ;; ;; Holy mode by default
 (add-hook 'org-agenda-mode-hook 'evil-emacs-state)
 (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
+
+(add-hook 'deft-mode-hook 'evil-emacs-state)
+(add-to-list 'evil-emacs-state-modes 'deft-mode)
 
 ;;
 ;; Navigation
