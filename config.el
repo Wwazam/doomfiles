@@ -13,7 +13,7 @@
                    doom-nord
                    doom-spacegrey
                    spacemacs-dark
-                   sanityinc-tomorrow-night
+                   doom-tomorrow-night
                    dorsey
                    junio
                    odersky
@@ -40,12 +40,14 @@
 
 ;;
 ;; ;; Holy mode by default
-(add-hook 'org-agenda-mode-hook 'evil-emacs-state)
-(add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
+;; (add-hook 'org-agenda-mode-hook 'evil-emacs-state)
+;; (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
 
 (add-hook 'deft-mode-hook 'evil-emacs-state)
 (add-to-list 'evil-emacs-state-modes 'deft-mode)
 
+;; (add-hook 'vterm-mode-hook 'evil-emacs-state)
+;; (add-to-list 'evil-emacs-state-modes 'vterm-mode)
 ;;
 ;; Navigation
 ;; ;; avy
@@ -182,14 +184,6 @@ skip exactly those headlines that do not match."
 
 (setq org-confirm-babel-evaluate nil)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '( (python  . t)
-    (plantuml . t)
-    (emacs-lisp . t)
-    (C . t)
-    ))
-
 ;;
 ;; ;; web
 (add-to-list 'auto-mode-alist '("\\.djhtml$" . web-mode))
@@ -256,3 +250,6 @@ skip exactly those headlines that do not match."
 ;; php
 (setq! lsp-clients-php-server-command
        (expand-file-name "~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
+
+
+(put 'narrow-to-region 'disabled nil)

@@ -22,7 +22,9 @@
        company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       (ivy
+        +icons
+        )               ; a search engine for love and life
 
        :ui
        deft              ; notational velocity for Emacs
@@ -95,7 +97,9 @@
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
-       lsp
+       (lsp
+        ;; +peek
+        )
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
