@@ -74,6 +74,7 @@
        electric          ; smarter, keyword-based electric-indent
        ibuffer           ; interactive buffer management
        vc                ; version-control and Emacs, sitting in a tree
+       (undo +tree)
 
        :term
        ;;eshell            ; a consistent, cross-platform shell (WIP)
@@ -146,13 +147,15 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org              ; organize your plain life in plain text
-        +dragndrop       ; drag & drop files/images into org buffers
+       (org                ; organize your plain life in plain text
+        +dragndrop         ; drag & drop files/images into org buffers
         ;;+hugo            ; use Emacs for hugo blogging
         ;;+jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
-        +pomodoro        ; be fruitful with the tomato technique
-        +present)        ; using org-mode for presentations
+        +pomodoro                       ; be fruitful with the tomato technique
+        +present
+        +roam
+        )        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more

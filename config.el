@@ -66,6 +66,7 @@
 ;; Org
 ;; ;; Directory
 (setq org-directory "~/documents/notes/orgFiles/")
+(setq org-roam-directory "~/documents/notes/roam/")
 
 ;; ;; Bullets
 (setq org-bullets-fac-name (quote org-bullet-face))
