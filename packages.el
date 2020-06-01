@@ -12,7 +12,6 @@
 
 (package! hc-zenburn-theme)
 (package! spacemacs-theme)
-(package! color-theme-sanityinc-tomorrow-theme)
 (package! ample-theme)
 (package! sublime-themes)
 (package! darktooth-theme)

@@ -70,7 +70,7 @@
        word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       dired             ; making dired pretty [functional]
+       (dired +ranger)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ibuffer           ; interactive buffer management
        vc                ; version-control and Emacs, sitting in a tree
@@ -135,9 +135,9 @@
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        (java +meghanada) ; the poster child for carpal tunnel syndrome
-       javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
-       ;;kotlin            ; a better, slicker Java(Script)
+       kotlin            ; a better, slicker Java(Script)
        latex             ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
@@ -154,21 +154,23 @@
         ;;+pandoc          ; export-with-pandoc support
         +pomodoro                       ; be fruitful with the tomato technique
         +present
-        +roam
+        ;; +roam
         )        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp)            ; beautiful is better than ugly
-       ;;qt                ; the 'cutest' gui framework ever
-       ;;racket            ; a DSL for DSLs
-       rest              ; Emacs as a REST client
-       ;;rst               ; ReST in peace
-       (ruby
+       (python
         +lsp
-        +rails
-        )              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+        +pyenv              ; beautiful is better than ugly
+        ;;qt                ; the 'cutest' gui framework ever
+        ;;racket            ; a DSL for DSLs
+        rest                            ; Emacs as a REST client
+        ;;rst               ; ReST in peace
+        (ruby
+         +lsp
+         +rails
+         ))              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
@@ -179,7 +181,7 @@
        web               ; the tubes
 
        :email
-       (mu4e +gmail)
+       ;;(mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 

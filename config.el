@@ -58,20 +58,11 @@
 (setq avy-all-windows t)
 
 
-;; ;; maximize windows
-
-(define-key evil-window-map (kbd "C-o") 'doom/window-maximize-buffer)
-
 ;;
 ;; Org
 ;; ;; Directory
 (setq org-directory "~/documents/notes/orgFiles/")
 (setq org-roam-directory "~/documents/notes/roam/")
-
-;; ;; Bullets
-(setq org-bullets-fac-name (quote org-bullet-face))
-(add-hook 'org-mode-hook (lambda ()(org-bullets-mode 1)))
-(setq org-bullets-bullet-list '("·"))
 
                                         ;(setq org-ellipsis " ▼")
 (set-display-table-slot standard-display-table
@@ -254,3 +245,10 @@ skip exactly those headlines that do not match."
 
 
 (put 'narrow-to-region 'disabled nil)
+
+;;
+;; ;; python
+(setq-hook! 'python-mode-hook +format-with-lsp nil)
+
+;; Hydra in Ivy
+(setq ivy-read-action-function #'ivy-hydra-read-action)
