@@ -1,6 +1,4 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-
-
 ;;
 ;; Graphic
 ;; ;; Theme
@@ -14,8 +12,7 @@
                    doom-spacegrey
                    spacemacs-dark
                    doom-tomorrow-night
-                   dorsey
-                   junio
+                   ;; junio
                    odersky
                    darktooth
                    jazz

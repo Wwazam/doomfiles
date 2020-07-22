@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: sprint
+# uuid: _my_sprint
+# key: sprint
+# condition: t
+# --
+#+TITLE: SPRINT: $1
+#+AUTHOR: Basile PRACCA
+#+EMAIL: bpracca@vivlio.com
+#+DATE:  `(format-time-string "%Y-%b-%d %a")`
+
+* Stories
+* Notes for next stories

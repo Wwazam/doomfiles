@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: new-story
+# uuid: _me_new-story
+# key: new-story
+# condition: t
+
+# --
+** ${1:Story Name} | ${2:Story Label}
+*** [/] Acceptance Criterias
+$3
+
+*** [/] Checklist
+$4
+
+*** Notes
+$0
