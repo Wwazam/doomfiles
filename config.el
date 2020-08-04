@@ -173,6 +173,13 @@ skip exactly those headlines that do not match."
 
 (setq org-confirm-babel-evaluate nil)
 
+;; tangle on save
+
+(add-hook! 'org-mode-hook
+  (add-hook! 'after-save-hook (org-babel-tangle))
+  )
+
+
 ;;
 ;; ;; web
 (add-to-list 'auto-mode-alist '("\\.djhtml$" . web-mode))
@@ -249,3 +256,49 @@ skip exactly those headlines that do not match."
 
 ;; Hydra in Ivy
 (setq ivy-read-action-function #'ivy-hydra-read-action)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("679ee3b86b4b34661a68ba45bbd373eab0284caee6249139b2a090c9ddd35ce0" "f589e634c9ff738341823a5a58fc200341b440611aaa8e0189df85b44533692b" "f30aded97e67a487d30f38a1ac48eddb49fdb06ac01ebeaff39439997cbdd869" "a2286409934b11f2f3b7d89b1eaebb965fd63bc1e0be1c159c02e396afb893c8" "5e0b63e0373472b2e1cf1ebcc27058a683166ab544ef701a6e7f2a9f33a23726" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" default)))
+ '(fci-rule-color "#5E5E5E")
+ '(package-selected-packages (quote (shfmt uuidgen org-beautify-theme)))
+ '(send-mail-function (quote mailclient-send-it))
+ '(user-mail-address "basile.pracca@gmail.com")
+ '(vc-annotate-background "#202020")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#C99090")
+     (40 . "#D9A0A0")
+     (60 . "#ECBC9C")
+     (80 . "#DDCC9C")
+     (100 . "#EDDCAC")
+     (120 . "#FDECBC")
+     (140 . "#6C8C6C")
+     (160 . "#8CAC8C")
+     (180 . "#9CBF9C")
+     (200 . "#ACD2AC")
+     (220 . "#BCE5BC")
+     (240 . "#CCF8CC")
+     (260 . "#A0EDF0")
+     (280 . "#79ADB0")
+     (300 . "#89C5C8")
+     (320 . "#99DDE0")
+     (340 . "#9CC7FB")
+     (360 . "#E090C7"))))
+ '(vc-annotate-very-old-color "#E090C7"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(map! (:map ivy-minibuffer-map
+       "M-<SPC>" #'ivy-restrict-to-matches))
+
+(define-key! :keymaps 'swiper-map
+  "C-s" 'counsel-minibuffer-history)
