@@ -139,100 +139,100 @@
        (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        kotlin)            ; a better, slicker Java(Script)
-latex             ; writing papers in Emacs has never been so fun
-;;lean
-;;factor
-;;ledger            ; an accounting system in Emacs
-;;lua               ; one-based indices? one-based indices
-markdown          ; writing docs for people to ignore
-;;nim               ; python + lisp at the speed of c
-;;nix               ; I hereby declare "nix geht mehr!"
-;;ocaml             ; an objective camel
-(org                ; organize your plain life in plain text
- +dragndrop         ; drag & drop files/images into org buffers
- ;;+hugo            ; use Emacs for hugo blogging
- ;;+jupyter        ; ipython/jupyter support for babel
- ;;+pandoc          ; export-with-pandoc support
- +pomodoro                       ; be fruitful with the tomato technique
- +present
- ;; +roam
- )        ; using org-mode for presentations
-;;perl              ; write code no one else can comprehend
-(php +lsp)               ; perl's insecure younger brother
-plantuml          ; diagrams for confusing people more
-;;purescript        ; javascript, but functional
+      latex             ; writing papers in Emacs has never been so fun
+      ;;lean
+      ;;factor
+      ;;ledger            ; an accounting system in Emacs
+      ;;lua               ; one-based indices? one-based indices
+      markdown          ; writing docs for people to ignore
+      ;;nim               ; python + lisp at the speed of c
+      ;;nix               ; I hereby declare "nix geht mehr!"
+      ;;ocaml             ; an objective camel
+      (org                ; organize your plain life in plain text
+      +dragndrop         ; drag & drop files/images into org buffers
+      ;;+hugo            ; use Emacs for hugo blogging
+      ;;+jupyter        ; ipython/jupyter support for babel
+      ;;+pandoc          ; export-with-pandoc support
+      +pomodoro                       ; be fruitful with the tomato technique
+      +present
+      ;; +roam
+      )        ; using org-mode for presentations
+      ;;perl              ; write code no one else can comprehend
+      (php +lsp)               ; perl's insecure younger brother
+      plantuml          ; diagrams for confusing people more
+      ;;purescript        ; javascript, but functional
 
-(python
- +lsp
- +pyenv              ; beautiful is better than ugly
- )
-;;qt                ; the 'cutest' gui framework ever
-;;racket            ; a DSL for DSLs
-rest                            ; Emacs as a REST client
-;;rst               ; ReST in peace
-(ruby
- +lsp
- +rails
- )              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-;;scala             ; java, but good
-;;scheme            ; a fully conniving family of lisps
-(sh +lsp)                ; she sells {ba,z,fi}sh shells on the C xor
-;;solidity          ; do you need a blockchain? No.
-;;swift             ; who asked for emoji variables?
-;;terra             ; Earth and Moon in alignment for performance.
-web               ; the tubes
+      (python
+      +lsp
+      +pyenv              ; beautiful is better than ugly
+      )
+      ;;qt                ; the 'cutest' gui framework ever
+      ;;racket            ; a DSL for DSLs
+      rest                            ; Emacs as a REST client
+      ;;rst               ; ReST in peace
+      (ruby
+      +lsp
+      +rails
+      )              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+      ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+      ;;scala             ; java, but good
+      ;;scheme            ; a fully conniving family of lisps
+      (sh +lsp)                ; she sells {ba,z,fi}sh shells on the C xor
+      ;;solidity          ; do you need a blockchain? No.
+      ;;swift             ; who asked for emoji variables?
+      ;;terra             ; Earth and Moon in alignment for performance.
+      web               ; the tubes
 
-:email
-;;(mu4e +gmail)
-;;notmuch
-;;(wanderlust +gmail)
+      :email
+      ;;(mu4e +gmail)
+      ;;notmuch
+      ;;(wanderlust +gmail)
 
-:app
-calendar
-;;irc               ; how neckbeards socialize
-(rss +org)        ; emacs as an RSS reader
-twitter           ; twitter client https://twitter.com/vnought
+      :app
+      calendar
+      ;;irc               ; how neckbeards socialize
+      (rss +org)        ; emacs as an RSS reader
+      twitter           ; twitter client https://twitter.com/vnought
 
-:config
-;;literate
-(default +bindings +smartparens)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("679ee3b86b4b34661a68ba45bbd373eab0284caee6249139b2a090c9ddd35ce0" "f589e634c9ff738341823a5a58fc200341b440611aaa8e0189df85b44533692b" "f30aded97e67a487d30f38a1ac48eddb49fdb06ac01ebeaff39439997cbdd869" "a2286409934b11f2f3b7d89b1eaebb965fd63bc1e0be1c159c02e396afb893c8" "5e0b63e0373472b2e1cf1ebcc27058a683166ab544ef701a6e7f2a9f33a23726" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" default)))
- '(fci-rule-color "#5E5E5E")
- '(send-mail-function (quote mailclient-send-it))
- '(user-mail-address "basile.pracca@gmail.com")
- '(vc-annotate-background "#202020")
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#C99090")
-     (40 . "#D9A0A0")
-     (60 . "#ECBC9C")
-     (80 . "#DDCC9C")
-     (100 . "#EDDCAC")
-     (120 . "#FDECBC")
-     (140 . "#6C8C6C")
-     (160 . "#8CAC8C")
-     (180 . "#9CBF9C")
-     (200 . "#ACD2AC")
-     (220 . "#BCE5BC")
-     (240 . "#CCF8CC")
-     (260 . "#A0EDF0")
-     (280 . "#79ADB0")
-     (300 . "#89C5C8")
-     (320 . "#99DDE0")
-     (340 . "#9CC7FB")
-     (360 . "#E090C7"))))
- '(vc-annotate-very-old-color "#E090C7"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+      :config
+      ;;literate
+      (default +bindings +smartparens)
+      (custom-set-variables
+      ;; custom-set-variables was added by Custom.
+      ;; If you edit it by hand, you could mess it up, so be careful.
+      ;; Your init file should contain only one such instance.
+      ;; If there is more than one, they won't work right.
+      '(custom-safe-themes
+        (quote
+          ("679ee3b86b4b34661a68ba45bbd373eab0284caee6249139b2a090c9ddd35ce0" "f589e634c9ff738341823a5a58fc200341b440611aaa8e0189df85b44533692b" "f30aded97e67a487d30f38a1ac48eddb49fdb06ac01ebeaff39439997cbdd869" "a2286409934b11f2f3b7d89b1eaebb965fd63bc1e0be1c159c02e396afb893c8" "5e0b63e0373472b2e1cf1ebcc27058a683166ab544ef701a6e7f2a9f33a23726" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" default)))
+      '(fci-rule-color "#5E5E5E")
+      '(send-mail-function (quote mailclient-send-it))
+      '(user-mail-address "basile.pracca@gmail.com")
+      '(vc-annotate-background "#202020")
+      '(vc-annotate-color-map
+        (quote
+          ((20 . "#C99090")
+          (40 . "#D9A0A0")
+          (60 . "#ECBC9C")
+          (80 . "#DDCC9C")
+          (100 . "#EDDCAC")
+          (120 . "#FDECBC")
+          (140 . "#6C8C6C")
+          (160 . "#8CAC8C")
+          (180 . "#9CBF9C")
+          (200 . "#ACD2AC")
+          (220 . "#BCE5BC")
+          (240 . "#CCF8CC")
+          (260 . "#A0EDF0")
+          (280 . "#79ADB0")
+          (300 . "#89C5C8")
+          (320 . "#99DDE0")
+          (340 . "#9CC7FB")
+          (360 . "#E090C7"))))
+      '(vc-annotate-very-old-color "#E090C7"))
+      (custom-set-faces
+      ;; custom-set-faces was added by Custom.
+      ;; If you edit it by hand, you could mess it up, so be careful.
+      ;; Your init file should contain only one such instance.
+      ;; If there is more than one, they won't work right.
+      )
