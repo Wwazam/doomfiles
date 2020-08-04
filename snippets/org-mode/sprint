@@ -2,12 +2,14 @@
 # name: sprint
 # uuid: _my_sprint
 # key: sprint
-# condition: t
+# condition: t         
 # --
 #+TITLE: SPRINT: $1
 #+AUTHOR: Basile PRACCA
 #+EMAIL: bpracca@vivlio.com
 #+DATE:  `(format-time-string "%Y-%b-%d %a")`
+
+#+TODO: | SETUP(s) PROB(p) DONE(d)
 
 * Stories
 * Notes for next stories

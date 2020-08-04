@@ -5,12 +5,8 @@
 # condition: t
 
 # --
-** ${1:Story Name} | ${2:Story Label}
+** ${2: Story Tag} | ${1:Story Name}
 *** [/] Acceptance Criterias
 $3
-
-*** [/] Checklist
-$4
-
-*** Notes
+*** [/] Notes
 $0
