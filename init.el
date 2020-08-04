@@ -117,13 +117,14 @@
        ;;assembly          ; assembly for fun or debugging
        (cc +lsp)                ; C/C++/Obj-C madness
        (clojure +lsp)           ; java with a lisp
-       ; common-lisp       ; if you've seen one lisp, you've seen them all
+       common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
        ;;elixir            ; erlang done right
-       ;;elm               ; care for a cup of TEA?
+       (elm
+        +lsp)               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
@@ -137,63 +138,65 @@
        (java +meghanada) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
-       kotlin            ; a better, slicker Java(Script)
-       latex             ; writing papers in Emacs has never been so fun
-       ;;lean
-       ;;factor
-       ;;ledger            ; an accounting system in Emacs
-       ;;lua               ; one-based indices? one-based indices
-       markdown          ; writing docs for people to ignore
-       ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
-       ;;ocaml             ; an objective camel
-       (org                ; organize your plain life in plain text
-        +dragndrop         ; drag & drop files/images into org buffers
-        ;;+hugo            ; use Emacs for hugo blogging
-        ;;+jupyter        ; ipython/jupyter support for babel
-        ;;+pandoc          ; export-with-pandoc support
-        +pomodoro                       ; be fruitful with the tomato technique
-        +present
-        ;; +roam
-        )        ; using org-mode for presentations
-       ;;perl              ; write code no one else can comprehend
-       (php +lsp)               ; perl's insecure younger brother
-       plantuml          ; diagrams for confusing people more
-       ;;purescript        ; javascript, but functional
-       (python
-        +lsp
-        +pyenv              ; beautiful is better than ugly
-        ;;qt                ; the 'cutest' gui framework ever
-        ;;racket            ; a DSL for DSLs
-        rest                            ; Emacs as a REST client
-        ;;rst               ; ReST in peace
-        (ruby
-         +lsp
-         +rails
-         ))              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       ;;scala             ; java, but good
-       ;;scheme            ; a fully conniving family of lisps
-       (sh +lsp)                ; she sells {ba,z,fi}sh shells on the C xor
-       ;;solidity          ; do you need a blockchain? No.
-       ;;swift             ; who asked for emoji variables?
-       ;;terra             ; Earth and Moon in alignment for performance.
-       web               ; the tubes
+       kotlin)            ; a better, slicker Java(Script)
+latex             ; writing papers in Emacs has never been so fun
+;;lean
+;;factor
+;;ledger            ; an accounting system in Emacs
+;;lua               ; one-based indices? one-based indices
+markdown          ; writing docs for people to ignore
+;;nim               ; python + lisp at the speed of c
+;;nix               ; I hereby declare "nix geht mehr!"
+;;ocaml             ; an objective camel
+(org                ; organize your plain life in plain text
+ +dragndrop         ; drag & drop files/images into org buffers
+ ;;+hugo            ; use Emacs for hugo blogging
+ ;;+jupyter        ; ipython/jupyter support for babel
+ ;;+pandoc          ; export-with-pandoc support
+ +pomodoro                       ; be fruitful with the tomato technique
+ +present
+ ;; +roam
+ )        ; using org-mode for presentations
+;;perl              ; write code no one else can comprehend
+(php +lsp)               ; perl's insecure younger brother
+plantuml          ; diagrams for confusing people more
+;;purescript        ; javascript, but functional
 
-       :email
-       ;;(mu4e +gmail)
-       ;;notmuch
-       ;;(wanderlust +gmail)
+(python
+ +lsp
+ +pyenv              ; beautiful is better than ugly
+ )
+;;qt                ; the 'cutest' gui framework ever
+;;racket            ; a DSL for DSLs
+rest                            ; Emacs as a REST client
+;;rst               ; ReST in peace
+(ruby
+ +lsp
+ +rails
+ )              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+;;scala             ; java, but good
+;;scheme            ; a fully conniving family of lisps
+(sh +lsp)                ; she sells {ba,z,fi}sh shells on the C xor
+;;solidity          ; do you need a blockchain? No.
+;;swift             ; who asked for emoji variables?
+;;terra             ; Earth and Moon in alignment for performance.
+web               ; the tubes
 
-       :app
-       calendar
-       ;;irc               ; how neckbeards socialize
-       (rss +org)        ; emacs as an RSS reader
-       twitter           ; twitter client https://twitter.com/vnought
+:email
+;;(mu4e +gmail)
+;;notmuch
+;;(wanderlust +gmail)
 
-       :config
-       ;;literate
-       (default +bindings +smartparens))
+:app
+calendar
+;;irc               ; how neckbeards socialize
+(rss +org)        ; emacs as an RSS reader
+twitter           ; twitter client https://twitter.com/vnought
+
+:config
+;;literate
+(default +bindings +smartparens)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
