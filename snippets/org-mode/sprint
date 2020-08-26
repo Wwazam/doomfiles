@@ -9,7 +9,7 @@
 #+EMAIL: bpracca@vivlio.com
 #+DATE:  `(format-time-string "%Y-%b-%d %a")`
 
-#+TODO: | SETUP(s) PROB(p) DONE(d)
+#+TODO: TODO(t) ISSU(i@) WAIT(w@) | SETUP(s) PROB(p) DONE(d) CNCL(c)
 
 * Stories
 * Notes for next stories

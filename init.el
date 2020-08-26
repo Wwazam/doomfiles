@@ -24,6 +24,9 @@
        ;;ido               ; the other *other* search engine...
        (ivy
         +icons
+        ;; +fuzzy
+        ;; +childframe
+        +prescient
         )               ; a search engine for love and life
 
        :ui
@@ -35,6 +38,7 @@
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
+       minimap
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -42,7 +46,7 @@
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
-       pretty-code       ; replace bits of code with pretty symbols
+       ligatures
        ;;tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
@@ -64,8 +68,7 @@
        multiple-cursors  ; editing in many places at once
        ;; objed             ; text object editing for the innocent
        ;; parinfer          ; turn lisp into python, sort of
-       ;; rotate-text
-                                        ; cycle region at point between text candidates
+       ;; rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
 
@@ -103,8 +106,8 @@
         )
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
-       ;;make              ; run make tasks from Emacs
-       pass              ; password manager for nerds
+       ;; make              ; run make tasks from Emacs
+       ;; pass              ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
@@ -138,7 +141,7 @@
        (java +meghanada) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
-       kotlin)            ; a better, slicker Java(Script)
+       kotlin            ; a better, slicker Java(Script)
       latex             ; writing papers in Emacs has never been so fun
       ;;lean
       ;;factor
@@ -155,7 +158,8 @@
       ;;+pandoc          ; export-with-pandoc support
       +pomodoro                       ; be fruitful with the tomato technique
       +present
-      ;; +roam
+      +roam
+      +pretty
       )        ; using org-mode for presentations
       ;;perl              ; write code no one else can comprehend
       (php +lsp)               ; perl's insecure younger brother
@@ -184,7 +188,7 @@
       web               ; the tubes
 
       :email
-      ;;(mu4e +gmail)
+      (mu4e +gmail)
       ;;notmuch
       ;;(wanderlust +gmail)
 
@@ -236,3 +240,4 @@
       ;; Your init file should contain only one such instance.
       ;; If there is more than one, they won't work right.
       )
+	  )

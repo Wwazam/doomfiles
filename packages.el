@@ -11,11 +11,7 @@
 (package! exec-path-from-shell)
 
 (package! hc-zenburn-theme)
-(package! spacemacs-theme)
-(package! ample-theme)
-(package! sublime-themes)
 (package! darktooth-theme)
-(package! jazz-theme)
-(package! subatomic-theme)
 (package! badwolf-theme)
-(package! vscdark-theme)
+(package! ayu-theme)
+(package! color-theme-sanityinc-tomorrow)
