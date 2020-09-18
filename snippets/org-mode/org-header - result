@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-header - result
+# key: :r                                                  
+# --
+:results ${1:$$(yas-choose-value '("output" "value" "none"))}

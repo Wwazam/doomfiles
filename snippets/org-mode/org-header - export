@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-header - export
+# key: :e                                                  
+# --
+:export ${1:$$(yas-choose-value '("code" "result" "both" "none"))}
