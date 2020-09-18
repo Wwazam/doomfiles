@@ -86,3 +86,7 @@
                (search-forward " " (line-end-position)))
              (1+ (point))))))
     '("#+property:" "#+begin_src" "#+header:"))))
+
+;;
+;; python
+(setq-hook! 'python-mode-hook +format-with-lsp nil)
