@@ -14,10 +14,12 @@
      ("deleted" :foreground "#ff2c4b" :bold t)))
  '(objed-cursor-color "#cc6666")
  '(package-selected-packages
-   '(yaml-tomato org-jira ayu-theme leuven-theme ox-json json-mode yaml-mode uuidgen shfmt org-beautify-theme))
+   '(dockerfile-mode yaml-tomato org-jira ayu-theme leuven-theme ox-json json-mode yaml-mode uuidgen shfmt org-beautify-theme))
  '(pdf-view-midnight-colors (cons "#c5c8c6" "#1d1f21"))
  '(rustic-ansi-faces
-   ["#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#c9b4cf" "#8abeb7" "#c5c8c6"]))
+   ["#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#c9b4cf" "#8abeb7" "#c5c8c6"])
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 587))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
