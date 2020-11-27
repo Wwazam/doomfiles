@@ -15,3 +15,8 @@
 (package! badwolf-theme)
 (package! ayu-theme)
 (package! color-theme-sanityinc-tomorrow)
+
+(package! elfeed-dashboard
+  :recipe (:host github :repo "Manoj321/elfeed-dashboard"
+           :files ("elfeed-dashboard.el")))
+

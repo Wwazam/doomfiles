@@ -134,3 +134,7 @@
 ;; elfeed
 (map! :map 'doom-leader-open-map "e" #'elfeed)
 (map! :map 'elfeed-search-mode-map :n "r" #'elfeed-search-fetch)
+(setq rmh-elfeed-org-files '("~/documents/notes/elfeed.org"))
+
+;; elfeed dashboard
+(setq elfeed-dashboard-file "~/.doom.d/elfeed_dashboard.org")
