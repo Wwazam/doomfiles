@@ -150,21 +150,24 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (setq user-mail-address "basile.pracca@gmail.com")
 
 (setq mu4e-bookmarks
-  '(( :name  "Unread messages"
-      :query "flag:unread AND NOT flag:trashed AND NOT maildir:/Trash"
-      :key ?u)
-    ( :name "Today's messages"
-      :query "date:today..now and NOT maildir:/Trash"
-      :key ?t)
-    ( :name "Last 7 days"
-      :query "date:7d..now AND NOT maildir:/Trash"
-      :hide-unread t
-      :key ?w)
-    (:name "Git"
-     :query "from:noreply@github.com or from:noreplay@gitlab.com"
-     :key ?g)
-    )
-  )
+      '(( :name  "Unread messages"
+          :query "flag:unread AND NOT flag:trashed AND maildir:/INBOX"
+          :key ?u)
+        ( :name "Today's messages"
+          :query "date:today..now and maildir:/INBOX"
+          :key ?t)
+        ( :name "Last 7 days"
+          :query "date:7d..now AND and maildir:/INBOX"
+          :hide-unread t
+          :key ?w)
+        ( :name "Important"
+          :query "maildir:/Starred"
+          :key ?i)
+        ( :name "Git"
+          :query "from:noreply@github.com or from:noreplay@gitlab.com"
+          :key ?g)
+        )
+      )
 ;;
 ;; elfeed
 (map! :map 'doom-leader-open-map "e" #'elfeed)
