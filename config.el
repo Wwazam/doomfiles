@@ -47,6 +47,41 @@
 (after! org
   (map! :map 'doom-leader-notes-map "i" #'org-id-store-link))
 
+;; Roam
+(defadvice! doom-modeline--reformat-roam (orig-fun)
+  :around #'doom-modeline-buffer-file-name
+  (message "Reformat?")
+  (message (buffer-file-name))
+  (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+      (replace-regexp-in-string
+       "\\(?:^\\|.*/\\)\\([0-9]\\{4\\}\\)\\([0-9]\\{2\\}\\)\\([0-9]\\{2\\}\\)[0-9]*-"
+       "(\\1-\\2-\\3) "
+       (funcall orig-fun))
+    (funcall orig-fun)))
+
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:(+org-entry-category)%?-12t% s")
+        (todo . " %i %-12:(+org-entry-category)")
+        (tags . " %i %-12:(+org-entry-category)")
+        (search . " %i %-12:(+org-entry-category)")))
+
+(defun +org-entry-category ()
+  "Get category of item at point.
+
+Supports `org-roam' filenames by chopping prefix cookie."
+  (+string-chop-prefix-regexp
+   "^[0-9]+\\-"
+   (or (org-entry-get nil "CATEGORY")
+       (if buffer-file-name
+           (file-name-sans-extension
+            (file-name-nondirectory buffer-file-name))
+         ""))))
+
+;; requires s.el
+(defun +string-chop-prefix-regexp (prefix s)
+  "Remove PREFIX regexp if it is at the start of S."
+  (s-chop-prefix (car (s-match prefix s)) s))
+
 ;; ;; Babel
 
 (setq org-confirm-babel-evaluate nil)
