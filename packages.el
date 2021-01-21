@@ -20,3 +20,4 @@
   :recipe (:host github :repo "Manoj321/elfeed-dashboard"
            :files ("elfeed-dashboard.el")))
 
+(package! vue-mode)
