@@ -15,7 +15,7 @@
                    sanityinc-tomorrow-night
                    darktooth
                    badwolf
-                   ayu-dark
+                   ;; ayu-dark
                    ))
 
 
