@@ -21,3 +21,5 @@
            :files ("elfeed-dashboard.el")))
 
 (package! vue-mode)
+
+(package! transpose-frame)

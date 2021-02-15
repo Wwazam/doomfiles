@@ -176,3 +176,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 ;; elfeed dashboard
 (setq elfeed-dashboard-file "~/.doom.d/elfeed_dashboard.org")
+
+;; window transpose
+(map! :map 'evil-window-map "t" #'transpose-frame)
