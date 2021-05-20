@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: React function componnent
+# uuid: react-function-componnent
+# key: rfc
+# condition: t
+# --
+import React from "react"
+
+const ${1:`(let* ((filename (split-string (buffer-file-name) "/")) (file (nth (1- (length filename)) filename))) (nth 0 (split-string file "\\.")))`} = (${2:props}) => {
+      return <>$0</>
+}
+
+export default $1;
