@@ -13,8 +13,6 @@
 (package! hc-zenburn-theme)
 (package! darktooth-theme)
 (package! badwolf-theme)
-(package! ayu-theme)
-(package! color-theme-sanityinc-tomorrow)
 
 (package! elfeed-dashboard
   :recipe (:host github :repo "Manoj321/elfeed-dashboard"
@@ -23,3 +21,4 @@
 (package! vue-mode)
 
 (package! transpose-frame)
+(package! lsp-pyright)

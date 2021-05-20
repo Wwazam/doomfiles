@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: template-movie
+# uuid: template-movie
+# key: tmovie
+# condition: t
+# --
+- tags :: [[roam:movie]]
+- director :: ${1:Director's name}
+- genre :: ${2:Genre}
+- date :: ${3:Date}
+- note :: ${4:Note}
+
+
+$0

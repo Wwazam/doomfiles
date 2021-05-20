@@ -8,13 +8,13 @@
 
 
 (setq theme-list '(
-                   hc-zenburn
-                   doom-material
-                   doom-nord
-                   doom-spacegrey
-                   sanityinc-tomorrow-night
+                   ;; hc-zenburn
                    darktooth
-                   badwolf
+                   ;; doom-material
+                   ;; doom-nord
+                   ;; doom-spacegrey
+                   ;; doom-tomorrow-night
+                   ;; badwolf
                    ;; ayu-dark
                    ))
 
@@ -129,6 +129,12 @@ Supports `org-roam' filenames by chopping prefix cookie."
 ;; python
 (setq-hook! 'python-mode-hook +format-with-lsp nil)
 
+;;
+;; js
+
+(setq-hook! 'js-mode-hook +format-with-lsp nil)
+
+(setq-hook! 'web-mode-hook rainbow-mode nil)
 
 ;;
 ;; ripgrep
