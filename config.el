@@ -126,8 +126,8 @@ Supports `org-roam' filenames by chopping prefix cookie."
     '("#+property:" "#+begin_src" "#+header:"))))
 
 ;;
-(setq-hook! 'python-mode-hook +format-with-lsp nil)
 ;; / ;; python
+(setq-hook! 'python-mode-hook +format-with-lsp t)
 
 ;;
 ;; / ;; js
