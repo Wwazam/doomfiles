@@ -3,7 +3,7 @@
 
 (setq byte-compile-warnings '(cl-functions))
 
-;; Graphic
+;; / ;; Graphic
 ;; ;; Theme
 
 
@@ -27,13 +27,13 @@
 (random-theme)
 
 ;;
-;; Evil
+;; / ;; Evil
 ;; ;; jk to Normal Mode
 (setq-default evil-escape-unordered-key-sequence "jk")
 (setq-default evil-escape-delay 0.5)
 
 ;;
-;; Org
+;; / ;; Org
 ;; ;; Directory
 (setq org-directory "~/documents/notes/roam")
 (setq org-agenda-files '("~/documents/notes/roam"))
@@ -47,7 +47,7 @@
 (after! org
   (map! :map 'doom-leader-notes-map "i" #'org-id-store-link))
 
-;; Roam
+;; / ;; Roam
 (defadvice! doom-modeline--reformat-roam (orig-fun)
   :around #'doom-modeline-buffer-file-name
   (message "Reformat?")
@@ -101,16 +101,16 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 
 ;;
-;; SSH Agent
+;; / ;; SSH Agent
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
 ;;
-;; php
+;; / ;; php
 (setq! lsp-clients-php-server-command
        (expand-file-name "~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
 
-;; yas
+;; / ;; yas
 (defun +yas/org-src-header-p ()
   "Return non-nil if point is on a org src header, nil otherwise."
   (car
@@ -126,24 +126,24 @@ Supports `org-roam' filenames by chopping prefix cookie."
     '("#+property:" "#+begin_src" "#+header:"))))
 
 ;;
-;; python
 (setq-hook! 'python-mode-hook +format-with-lsp nil)
+;; / ;; python
 
 ;;
-;; js
+;; / ;; js
 
 (setq-hook! 'js-mode-hook +format-with-lsp nil)
 
 (setq-hook! 'web-mode-hook rainbow-mode nil)
 
 ;;
-;; ripgrep
+;; / ;; ripgrep
 
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
 
 ;;
-;; mu4e
+;; / ;; mu4e
 (setq +mu4e-mu4e-mail-path '~/documents/mail)
 (set-email-account! "basile.pracca@gmail.com"
                     '((mu4e-sent-folder       . "/Sent")
@@ -175,13 +175,13 @@ Supports `org-roam' filenames by chopping prefix cookie."
         )
       )
 ;;
-;; elfeed
+;; / ;; elfeed
 (map! :map 'doom-leader-open-map "e" #'elfeed)
 (map! :map 'elfeed-search-mode-map :n "r" #'elfeed-search-fetch)
 (setq rmh-elfeed-org-files '("~/documents/notes/elfeed.org"))
 
-;; elfeed dashboard
+;; / ;; elfeed dashboard
 (setq elfeed-dashboard-file "~/.doom.d/elfeed_dashboard.org")
 
-;; window transpose
+;; / ;; window transpose
 (map! :map 'evil-window-map "t" #'transpose-frame)
