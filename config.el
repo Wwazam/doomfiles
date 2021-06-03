@@ -185,3 +185,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 ;; / ;; window transpose
 (map! :map 'evil-window-map "t" #'transpose-frame)
+
+;; / ;; avy
+(map! :nvei "C-." #'avy-goto-char-2)
+(map! :nvei "C->" #'avy-resume)
