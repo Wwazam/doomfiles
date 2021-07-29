@@ -22,12 +22,13 @@
        (company +childframe)           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy
-        +icons
-        ;; +fuzzy
-        ;; +childframe
-        +prescient
-        )               ; a search engine for love and life
+       ;; (ivy
+       ;;  +icons
+       ;;  ;; +fuzzy
+       ;;  ;; +childframe
+       ;;  +prescient
+       ;;  )               ; a search engine for love and life
+       (vertico +icons)
 
        :ui
        deft              ; notational velocity for Emacs
@@ -88,7 +89,7 @@
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       spell             ; tasing you for misspelling mispelling
+       ;; spell             ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
@@ -126,6 +127,7 @@
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
+       ;; (dart +flutter)
        ;;elixir            ; erlang done right
        (elm
         +lsp)               ; care for a cup of TEA?
@@ -139,17 +141,18 @@
        ;;go                ; the hipster dialect
        ;;(haskell +dante)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
-       ;;idris             ;
-       (java +meghanada) ; the poster child for carpal tunnel syndrome
+       ;;idris             ; a language you can depend on
+       ;;json              ; At least it ain't XML
+       ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
        (javascript )        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
-       kotlin            ; a better, slicker Java(Script)
+       ;;kotlin            ; a better, slicker Java(Script)
        latex             ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
-       markdown          ; writing docs for people to ignore
+       ;;markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
@@ -160,7 +163,7 @@
         ;;+pandoc          ; export-with-pandoc support
         +pomodoro                       ; be fruitful with the tomato technique
         +present
-        +roam
+        +roam2
         +pretty
         )        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
@@ -177,11 +180,11 @@
        ;;racket            ; a DSL for DSLs
        rest                            ; Emacs as a REST client
        ;;rst               ; ReST in peace
-       (ruby
-        +lsp
-        +rails
-        )              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;(ruby
+        ;;+lsp
+        ;;+rails
+        ;;)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       ;;;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        (sh +lsp)                ; she sells {ba,z,fi}sh shells on the C xor
