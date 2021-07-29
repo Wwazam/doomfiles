@@ -1,6 +1,13 @@
+#+TITLE: Litterate Configuration
+
+* Current Config
+** Intro
+#+begin_src elisp
 (setq byte-compile-warnings '(cl-functions))
 
-;; / ;; Graphic
+#+END_SRC
+** Graphic
+#+BEGIN_SRC elisp
 ;; ;; Theme
 
 
@@ -24,13 +31,17 @@
 (random-theme)
 
 ;;
-;; / ;; Evil
+#+END_SRC
+** Evil
+#+BEGIN_SRC elisp
 ;; ;; jk to Normal Mode
 (setq-default evil-escape-unordered-key-sequence "jk")
 (setq-default evil-escape-delay 0.5)
 
 ;;
-;; / ;; Org
+#+END_SRC
+** Org
+#+BEGIN_SRC elisp
 ;; ;; Directory
 (setq org-directory "~/documents/notes/roam")
 (setq org-agenda-files '("~/documents/notes/roam"))
@@ -44,7 +55,9 @@
 (after! org
   (map! :map 'doom-leader-notes-map "i" #'org-id-store-link))
 
-;; / ;; Roam
+  #+END_SRC
+** Roam
+#+BEGIN_SRC elisp
 (defadvice! doom-modeline--reformat-roam (orig-fun)
   :around #'doom-modeline-buffer-file-name
   (message "Reformat?")
@@ -98,16 +111,22 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 
 ;;
-;; / ;; SSH Agent
+#+END_SRC
+** SSH Agent
+#+BEGIN_SRC elisp
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
 ;;
-;; / ;; php
+#+END_SRC
+** php
+#+BEGIN_SRC elisp
 (setq! lsp-clients-php-server-command
        (expand-file-name "~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
 
-;; / ;; yas
+       #+END_SRC
+** yas
+#+BEGIN_SRC elisp
 (defun +yas/org-src-header-p ()
   "Return non-nil if point is on a org src header, nil otherwise."
   (car
@@ -123,24 +142,32 @@ Supports `org-roam' filenames by chopping prefix cookie."
     '("#+property:" "#+begin_src" "#+header:"))))
 
 ;;
-;; / ;; python
+#+END_SRC
+** python
+#+BEGIN_SRC elisp
 (setq-hook! 'python-mode-hook +format-with-lsp t)
 
 ;;
-;; / ;; js
+#+END_SRC
+** js
+#+BEGIN_SRC elisp
 
 (setq-hook! 'js-mode-hook +format-with-lsp nil)
 
 (setq-hook! 'web-mode-hook rainbow-mode nil)
 
 ;;
-;; / ;; ripgrep
+#+END_SRC
+** ripgrep
+#+BEGIN_SRC elisp
 
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
 
 ;;
-;; / ;; mu4e
+#+END_SRC
+** mu4e
+#+BEGIN_SRC elisp
 (setq +mu4e-mu4e-mail-path '~/documents/mail)
 (set-email-account! "basile.pracca@gmail.com"
                     '((mu4e-sent-folder       . "/Sent")
@@ -172,17 +199,27 @@ Supports `org-roam' filenames by chopping prefix cookie."
         )
       )
 ;;
-;; / ;; elfeed
+#+END_SRC
+** elfeed
+#+BEGIN_SRC elisp
 (map! :map 'doom-leader-open-map "e" #'elfeed)
 (map! :map 'elfeed-search-mode-map :n "r" #'elfeed-search-fetch)
 (setq rmh-elfeed-org-files '("~/documents/notes/elfeed.org"))
 
-;; / ;; elfeed dashboard
+#+END_SRC
+** elfeed dashboard
+#+BEGIN_SRC elisp
 (setq elfeed-dashboard-file "~/.doom.d/elfeed_dashboard.org")
 
-;; / ;; window transpose
+#+END_SRC
+** window transpose
+#+BEGIN_SRC elisp
 (map! :map 'evil-window-map "t" #'transpose-frame)
 
-;; / ;; avy
+#+END_SRC
+** avy
+#+BEGIN_SRC elisp
 (map! :nvei "C-." #'avy-goto-char-2)
 (map! :nvei "C->" #'avy-resume)
+
+#+end_src
