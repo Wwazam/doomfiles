@@ -8,14 +8,14 @@
 
 
 (setq theme-list '(
-                   ;; hc-zenburn
+                   doom-zenburn
                    darktooth
-                   ;; doom-material
-                   ;; doom-nord
-                   ;; doom-spacegrey
-                   ;; doom-tomorrow-night
-                   ;; badwolf
-                   ;; ayu-dark
+                   doom-material
+                   doom-nord
+                   doom-spacegrey
+                   doom-tomorrow-night
+                   badwolf
+                   doom-ayu-mirage
                    ))
 
 
