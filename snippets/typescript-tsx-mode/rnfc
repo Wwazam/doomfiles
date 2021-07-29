@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: rnfc
+# key: rnfc
+# --
+import React from "react"
+import {View, Text, StyleSheet} from "react-native"
+
+const ${1:`(let* ((filename (split-string (buffer-file-name) "/")) (file (nth (1- (length filename)) filename))) (nth 0 (split-string file "\\.")))`} = (${2:props}) => {
+      return ${0:<></>}
+}
+
+export default $1;
