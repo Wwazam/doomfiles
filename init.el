@@ -19,7 +19,7 @@
        ;;japanese
 
        :completion
-       (company +childframe)           ; the ultimate code completion backend
+       (company)           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy
@@ -40,7 +40,7 @@
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
-       minimap
+       ;; minimap
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -63,13 +63,12 @@
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        (format
-        +onsave
-        )  ; automated prettiness
+        +onsave) ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        lispy             ; vim for lisp, for people who don't like vim
-       multiple-cursors  ; editing in many places at once
+       ;; multiple-cursors  ; editing in many places at once
        ;; objed             ; text object editing for the innocent
-       ;; parinfer          ; turn lisp into python, sort of
+       ;; (parinfer +rust)          ; turn lisp into python, sort of
        ;; rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
@@ -103,9 +102,7 @@
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
-       (lsp
-        +peek
-        )
+       (lsp)
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;; make              ; run make tasks from Emacs
@@ -129,8 +126,7 @@
        data              ; config/data formats
        ;; (dart +flutter)
        ;;elixir            ; erlang done right
-       (elm
-        +lsp)               ; care for a cup of TEA?
+       (elm +lsp) ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
@@ -144,7 +140,7 @@
        ;;idris             ; a language you can depend on
        ;;json              ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       (javascript )        ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        latex             ; writing papers in Emacs has never been so fun
@@ -158,14 +154,8 @@
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
         +dragndrop         ; drag & drop files/images into org buffers
-        ;;+hugo            ; use Emacs for hugo blogging
-        ;;+jupyter        ; ipython/jupyter support for babel
-        ;;+pandoc          ; export-with-pandoc support
         +pomodoro                       ; be fruitful with the tomato technique
-        +present
-        +roam2
-        +pretty
-        )        ; using org-mode for presentations
+        +roam2)
        ;;perl              ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
@@ -174,8 +164,7 @@
        (python
         +pyenv              ; beautiful is better than ugly
         +lsp
-        +pyright
-        )
+        +pyright)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        rest                            ; Emacs as a REST client
@@ -241,10 +230,10 @@
             (340 . "#9CC7FB")
             (360 . "#E090C7"))))
         '(vc-annotate-very-old-color "#E090C7"))
-       (custom-set-faces
+       (custom-set-faces))
         ;; custom-set-faces was added by Custom.
         ;; If you edit it by hand, you could mess it up, so be careful.
         ;; Your init file should contain only one such instance.
         ;; If there is more than one, they won't work right.
-        )
-       )
+        
+       
