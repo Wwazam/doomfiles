@@ -1,17 +1,24 @@
+:PROPERTIES:
+:HEADER_ARGS: :results none
+:END:
 #+TITLE: Litterate Configuration
 
-* Current Config
-** Intro
+* Intro
 #+begin_src elisp
 (setq byte-compile-warnings '(cl-functions))
 
 #+END_SRC
-** Graphic
+** random keybindings
+#+begin_src elisp
+(map!
+ (:map override :i "C-k" #'evil-insert-digraph))
+#+end_src
+* Graphic
+** Theme
+
 #+BEGIN_SRC elisp
-;; ;; Theme
-
-
 (setq theme-list '(
+                   doom-1337
                    doom-zenburn
                    darktooth
                    doom-material
@@ -29,35 +36,73 @@
   (load-theme (nth (random (length theme-list)) theme-list) t))
 
 (random-theme)
-
 ;;
 #+END_SRC
-** Evil
+** Font
+#+begin_src elisp
+;; (setq doom-font (font-spec :family "hack" :size 14))
+#+end_src
+* Evil
 #+BEGIN_SRC elisp
 ;; ;; jk to Normal Mode
 (setq-default evil-escape-unordered-key-sequence "jk")
 (setq-default evil-escape-delay 0.5)
+;;
+#+END_SRC
+* Languages
+** Common Lisp
+*** Change completion type
+Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
+
+#+begin_src elisp
+(after! sly
+  (setq sly-complete-symbol-function 'sly-flex-completions))
+#+end_src
+
+*** jk in lisp
+#+begin_src elisp
+(after! (:or sly lispy)
+  (defun +lispy-inhibit-evil-escape-fn ()
+    nil))
+#+end_src
+** Elm
+*** format on save
+#+begin_src elisp
+(add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+#+end_src
+*** Compile buffer rule
+#+begin_src elisp
+(set-popup-rule! "^\\*elm-make*" :side 'right :width 82)
+#+end_src
+*** better tab
+#+begin_src elisp
+(map! :mode 'elm-mode
+      :i "TAB" #'elm-indent-cycle)
+#+end_src
+** js
+#+BEGIN_SRC elisp
+
+(setq-hook! 'js-mode-hook +format-with-lsp nil)
+
+(setq-hook! 'web-mode-hook rainbow-mode nil)
 
 ;;
 #+END_SRC
 ** Org
-#+BEGIN_SRC elisp
-;; ;; Directory
+*** Org directory
+#+begin_src elisp
 (setq org-directory "~/documents/notes/roam")
 (setq org-agenda-files '("~/documents/notes/roam"))
+#+end_src
+*** Org-id
+#+begin_src elisp
+(setq org-id-locations-file "~/documents/notes/roam/.orgids")
+#+end_src
+*** Roam
+**** TODO Stuff
+#+begin_src elisp
 (setq org-roam-directory "~/documents/notes/roam/")
 
-(set-display-table-slot standard-display-table
-                        'selective-display (string-to-vector " …")) ; or whatever you like
-(after! org
-  (setq org-log-into-drawer t))
-
-(after! org
-  (map! :map 'doom-leader-notes-map "i" #'org-id-store-link))
-
-  #+END_SRC
-** Roam
-#+BEGIN_SRC elisp
 (defadvice! doom-modeline--reformat-roam (orig-fun)
   :around #'doom-modeline-buffer-file-name
   (message "Reformat?")
@@ -68,12 +113,6 @@
        "(\\1-\\2-\\3) "
        (funcall orig-fun))
     (funcall orig-fun)))
-
-(setq org-agenda-prefix-format
-      '((agenda . " %i %-12:(+org-entry-category)%?-12t% s")
-        (todo . " %i %-12:(+org-entry-category)")
-        (tags . " %i %-12:(+org-entry-category)")
-        (search . " %i %-12:(+org-entry-category)")))
 
 (defun +org-entry-category ()
   "Get category of item at point.
@@ -92,32 +131,54 @@ Supports `org-roam' filenames by chopping prefix cookie."
   "Remove PREFIX regexp if it is at the start of S."
   (s-chop-prefix (car (s-match prefix s)) s))
 
-;; ;; Babel
+#+end_src
+**** HOLD Capture templates
+#+begin_src
+(setq org-roam-capture-templates
+      '(("d"
+         "default"
+         plain
+         "%?"
+         :if-new (file+head
+                  "%<%Y%m%d%H%M%S>-${slug}.org"
+                  "#+title: ${title}\n\n- tags ::\n\n* Content")
+         :unnarrowed t)))
+#+end_src
 
-(setq org-confirm-babel-evaluate nil)
-
-;; tangle on save
-
+*** Babel
+**** Elm
+#+begin_src elisp
+(org-babel-do-load-languages
+   'org-babel-load-languages
+   '((elm . t)))
+#+end_src
+**** Tangle on save
+#+begin_src elisp
 ;; (add-hook! 'org-mode-hook
 ;;   (add-hook! 'after-save-hook (org-babel-tangle))
 ;;   )
+#+end_src
+**** Don't ask to execute code blocks
+#+BEGIN_SRC elisp
 
-;;
-;; ;;
-(map!
- (:map override :i "C-k" #'evil-insert-digraph))
-
-(setq doom-font (font-spec :family "hack" :size 14))
-
-
+(setq org-confirm-babel-evaluate nil)
 ;;
 #+END_SRC
-** SSH Agent
+*** Other
 #+BEGIN_SRC elisp
-(exec-path-from-shell-copy-env "SSH_AGENT_PID")
-(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+;; ;; Directory
 
-;;
+(set-display-table-slot standard-display-table
+                        'selective-display (string-to-vector " …")) ; or whatever you like
+(after! org
+  (setq org-log-into-drawer t))
+
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:(+org-entry-category)%?-12t% s")
+        (todo . " %i %-12:(+org-entry-category)")
+        (tags . " %i %-12:(+org-entry-category)")
+        (search . " %i %-12:(+org-entry-category)")))
+
 #+END_SRC
 ** php
 #+BEGIN_SRC elisp
@@ -125,7 +186,21 @@ Supports `org-roam' filenames by chopping prefix cookie."
        (expand-file-name "~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
 
        #+END_SRC
-** yas
+** python
+#+BEGIN_SRC elisp
+(setq-hook! 'python-mode-hook +format-with-lsp t)
+
+;;
+#+END_SRC
+
+* SSH Agent
+#+BEGIN_SRC elisp
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
+;;
+#+END_SRC
+* yas
 #+BEGIN_SRC elisp
 (defun +yas/org-src-header-p ()
   "Return non-nil if point is on a org src header, nil otherwise."
@@ -143,22 +218,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 ;;
 #+END_SRC
-** python
-#+BEGIN_SRC elisp
-(setq-hook! 'python-mode-hook +format-with-lsp t)
-
-;;
-#+END_SRC
-** js
-#+BEGIN_SRC elisp
-
-(setq-hook! 'js-mode-hook +format-with-lsp nil)
-
-(setq-hook! 'web-mode-hook rainbow-mode nil)
-
-;;
-#+END_SRC
-** ripgrep
+* ripgrep
 #+BEGIN_SRC elisp
 
 (after! counsel
@@ -166,6 +226,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 ;;
 #+END_SRC
+* Applications
 ** mu4e
 #+BEGIN_SRC elisp
 (setq +mu4e-mu4e-mail-path '~/documents/mail)
@@ -207,17 +268,24 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (setq rmh-elfeed-org-files '("~/documents/notes/elfeed.org"))
 
 #+END_SRC
-** elfeed dashboard
+*** elfeed dashboard
 #+BEGIN_SRC elisp
 (setq elfeed-dashboard-file "~/.doom.d/elfeed_dashboard.org")
 
 #+END_SRC
-** window transpose
+* Tools
+** Vertico
+*** Load consult.el
+#+begin_src elisp
+(autoload 'consult--directory-prompt "consult")
+#+end_src
+
+* window transpose
 #+BEGIN_SRC elisp
 (map! :map 'evil-window-map "t" #'transpose-frame)
 
 #+END_SRC
-** avy
+* avy
 #+BEGIN_SRC elisp
 (map! :nvei "C-." #'avy-goto-char-2)
 (map! :nvei "C->" #'avy-resume)
