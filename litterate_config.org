@@ -18,15 +18,15 @@
 
 #+BEGIN_SRC elisp
 (setq theme-list '(
-                   doom-1337
-                   doom-zenburn
+                   ;; doom-1337
+                   ;; doom-zenburn
                    darktooth
-                   doom-material
-                   doom-nord
-                   doom-spacegrey
-                   doom-tomorrow-night
+                   ;; doom-material
+                   ;; doom-nord
+                   ;; doom-spacegrey
+                   ;; doom-tomorrow-night
                    badwolf
-                   doom-ayu-mirage
+                   ;; doom-ayu-mirage
                    ))
 
 
@@ -143,6 +143,11 @@ Supports `org-roam' filenames by chopping prefix cookie."
                   "%<%Y%m%d%H%M%S>-${slug}.org"
                   "#+title: ${title}\n\n- tags ::\n\n* Content")
          :unnarrowed t)))
+#+end_src
+**** No autocompletion all the time
+I always insert a link at the end of a heading, it's annoying
+#+begin_src elisp
+(setq org-roam-completion-everywhere nil)
 #+end_src
 
 *** Babel
