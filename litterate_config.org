@@ -15,18 +15,18 @@
 #+end_src
 * Graphic
 ** Theme
-
 #+BEGIN_SRC elisp
 (setq theme-list '(
                    ;; doom-1337
                    ;; doom-zenburn
-                   darktooth
+                   ;; darktooth
                    ;; doom-material
                    ;; doom-nord
                    ;; doom-spacegrey
                    ;; doom-tomorrow-night
-                   badwolf
+                   ;; badwolf
                    ;; doom-ayu-mirage
+                   doom-opera
                    ))
 
 
@@ -98,6 +98,8 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 #+begin_src elisp
 (setq org-id-locations-file "~/documents/notes/roam/.orgids")
 #+end_src
+*** Org agenda
+
 *** Roam
 **** TODO Stuff
 #+begin_src elisp
@@ -132,7 +134,20 @@ Supports `org-roam' filenames by chopping prefix cookie."
   (s-chop-prefix (car (s-match prefix s)) s))
 
 #+end_src
-**** HOLD Capture templates
+
+**** TODO Capture templates
+The map is wrong
+#+begin_src elisp
+(defun my/org-roam-capture-inbox ()
+  (interactive)
+  (org-roam-capture- :node (org-roam-node-create)
+                     :templates '(("i" "inbox" plain "* %?"
+                                  :if-new (file+head "Inbox.org" "#+title: Inbox\n")))))
+
+(map! :map 'doom-leader-notes-map "i" #'my/org-roam-capture-inbox )
+#+end_src
+
+***** HOLD old Capture try
 #+begin_src
 (setq org-roam-capture-templates
       '(("d"
@@ -266,6 +281,10 @@ I always insert a link at the end of a heading, it's annoying
       )
 ;;
 #+END_SRC
+** man
+#+begin_src elisp
+(set-popup-rule! "^\\*Man" :side 'right :width 80)
+#+end_src
 ** elfeed
 #+BEGIN_SRC elisp
 (map! :map 'doom-leader-open-map "e" #'elfeed)

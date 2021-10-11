@@ -11,3 +11,5 @@
 
 (package! transpose-frame)
 (package! lsp-pyright)
+
+(package! jenkinsfile-mode)
