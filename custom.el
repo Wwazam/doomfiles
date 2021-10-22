@@ -6,7 +6,7 @@
  '(evilem-style 'pre)
  '(jenkins-url "http://localhost:8080")
  '(package-selected-packages
-   '(jenkinsfile-mode jenkins vagrant vimrc-mode ayu-theme lsp-pyright)))
+   '(puppet-mode org-sidebar kubedoc kubernetes-evil kubel-evil kubernetes jenkinsfile-mode jenkins vagrant vimrc-mode ayu-theme lsp-pyright)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

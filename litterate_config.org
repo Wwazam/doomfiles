@@ -164,7 +164,28 @@ I always insert a link at the end of a heading, it's annoying
 #+begin_src elisp
 (setq org-roam-completion-everywhere nil)
 #+end_src
+***** HOLD Try to trigger org-roam-node-insert with `[[`
+#+begin_src elisp
+;(map! :i "[[" #'org-roam-node-insert)
+#+end_src
 
+**** Org-roam server
+#+begin_src elisp
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+end_src
 *** Babel
 **** Elm
 #+begin_src elisp
@@ -283,14 +304,13 @@ I always insert a link at the end of a heading, it's annoying
 #+END_SRC
 ** man
 #+begin_src elisp
-(set-popup-rule! "^\\*Man" :side 'right :width 80)
+(set-popup-rule! "^\\*Man" :side 'right :width 82)
 #+end_src
 ** elfeed
 #+BEGIN_SRC elisp
 (map! :map 'doom-leader-open-map "e" #'elfeed)
 (map! :map 'elfeed-search-mode-map :n "r" #'elfeed-search-fetch)
 (setq rmh-elfeed-org-files '("~/documents/notes/elfeed.org"))
-
 #+END_SRC
 *** elfeed dashboard
 #+BEGIN_SRC elisp
