@@ -59,12 +59,6 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
   (setq sly-complete-symbol-function 'sly-flex-completions))
 #+end_src
 
-*** jk in lisp
-#+begin_src elisp
-(after! (:or sly lispy)
-  (defun +lispy-inhibit-evil-escape-fn ()
-    nil))
-#+end_src
 ** Elm
 *** format on save
 #+begin_src elisp

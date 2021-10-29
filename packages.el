@@ -21,3 +21,9 @@
 (unpin! org-roam)
 (package! websocket)
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
+
+(package! ob-async)
+
+;; weird bug
+;; Error (emacs-lisp-mode-hook): Error running hook "lispy-mode" because: (void-function flx-make-string-cache)
+(package! flx)
