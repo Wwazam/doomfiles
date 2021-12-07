@@ -40,7 +40,7 @@
 #+END_SRC
 ** Font
 #+begin_src elisp
-;; (setq doom-font (font-spec :family "hack" :size 14))
+(setq doom-font (font-spec :family "hack" :size 16))
 #+end_src
 * Evil
 #+BEGIN_SRC elisp
@@ -86,14 +86,15 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 *** Org directory
 #+begin_src elisp
 (setq org-directory "~/documents/notes/roam")
-(setq org-agenda-files '("~/documents/notes/roam"))
 #+end_src
 *** Org-id
 #+begin_src elisp
 (setq org-id-locations-file "~/documents/notes/roam/.orgids")
 #+end_src
 *** Org agenda
-
+#+begin_src elisp
+(setq org-agenda-files '("~/documents/notes/roam/daily"))
+#+end_src
 *** Roam
 **** TODO Stuff
 #+begin_src elisp
@@ -180,6 +181,36 @@ I always insert a link at the end of a heading, it's annoying
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 #+end_src
+**** Org-roam-agenda
+***** Add hook when changing todo state
+#+begin_src elisp
+(defun my/org-project-find-id ()
+  (when (equal org-state "PROJ")
+    (org-id-get-create)))
+
+(add-hook! 'org-after-todo-state-change-hook #'my/org-project-find-id)
+
+#+end_src
+***** List of files with todo keywords
+#+begin_src elisp
+(defun my/org-roam-agenda-files ()
+  (mapcar #'org-roam-node-file
+          (seq-filter #'org-roam-node-todo (org-roam-node-list))))
+#+end_src
+
+***** Map to roam agenda view
+#+begin_src elisp
+(defun my/org-roam-agenda ()
+  (interactive)
+  (let ((org-agenda-files (mapcar #'org-roam-node-file
+                                (seq-filter #'org-roam-node-todo (org-roam-node-list)))))
+    (org-todo-list 2)))
+
+(map! :map 'doom-leader-notes-map
+      (:prefix ("p" . "project")
+       "t" #'my/org-roam-agenda))
+#+end_src
+
 *** Babel
 **** Elm
 #+begin_src elisp
@@ -209,8 +240,8 @@ I always insert a link at the end of a heading, it's annoying
   (setq org-log-into-drawer t))
 
 (setq org-agenda-prefix-format
-      '((agenda . " %i %-12:(+org-entry-category)%?-12t% s")
-        (todo . " %i %-12:(+org-entry-category)")
+      '((agenda . " %i %-35:(+org-entry-category)%?-12t% s")
+        (todo . " %i %-35:(+org-entry-category)")
         (tags . " %i %-12:(+org-entry-category)")
         (search . " %i %-12:(+org-entry-category)")))
 
@@ -316,6 +347,21 @@ I always insert a link at the end of a heading, it's annoying
 *** Load consult.el
 #+begin_src elisp
 (autoload 'consult--directory-prompt "consult")
+#+end_src
+** Blamer
+#+begin_src elisp
+(use-package blamer
+  :defer 20
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 110
+                   :italic t)))
+  :config
+  (global-blamer-mode 1))
 #+end_src
 
 * window transpose

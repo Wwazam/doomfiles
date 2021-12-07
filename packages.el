@@ -27,3 +27,5 @@
 ;; weird bug
 ;; Error (emacs-lisp-mode-hook): Error running hook "lispy-mode" because: (void-function flx-make-string-cache)
 (package! flx)
+
+(package! blamer)
