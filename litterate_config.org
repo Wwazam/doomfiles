@@ -83,6 +83,17 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 ;;
 #+END_SRC
 ** Org
+*** todo keywords
+#+begin_src elisp
+(setq org-todo-keywords
+      '((sequence "STRT(s)" "TODO(t)" "IDEA(i@)" "PROJ(p@)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "KILL(k@)")
+        (sequence "[!](T)" "[?](Q)" "|" "[X](D)")))
+#+end_src
+
+**** log into drawer
+#+begin_src elisp
+(setq org-log-into-drawer 't)
+#+end_src
 *** Org directory
 #+begin_src elisp
 (setq org-directory "~/documents/notes/roam")
@@ -92,9 +103,26 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 (setq org-id-locations-file "~/documents/notes/roam/.orgids")
 #+end_src
 *** Org agenda
+**** Files
 #+begin_src elisp
 (setq org-agenda-files '("~/documents/notes/roam/daily"))
 #+end_src
+**** Agenda Views
+#+begin_src elisp
+(setq org-agenda-custom-commands
+      '(("n" "Agenda and all TODOs"
+         ((agenda "")
+          (todo "STRT")
+          (todo "TODO")
+          (todo "WAIT|HOLD")
+          (todo "PROJ")
+          (todo "IDEA")))
+        ("d" "Diary"
+         ((todo "\[\!\]")
+          (todo "[?]")
+          (todo "[X]")))))
+#+end_src
+
 *** Roam
 **** TODO Stuff
 #+begin_src elisp
@@ -255,16 +283,12 @@ I always insert a link at the end of a heading, it's annoying
 ** python
 #+BEGIN_SRC elisp
 (setq-hook! 'python-mode-hook +format-with-lsp t)
-
-;;
 #+END_SRC
 
 * SSH Agent
 #+BEGIN_SRC elisp
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
-
-;;
 #+END_SRC
 * yas
 #+BEGIN_SRC elisp
@@ -281,16 +305,11 @@ I always insert a link at the end of a heading, it's annoying
               (search-forward " " (line-end-position)))
             (1+ (point))))))
     '("#+property:" "#+begin_src" "#+header:"))))
-
-;;
 #+END_SRC
 * ripgrep
 #+BEGIN_SRC elisp
-
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
-
-;;
 #+END_SRC
 * Applications
 ** mu4e
@@ -325,7 +344,6 @@ I always insert a link at the end of a heading, it's annoying
           :key ?g)
         )
       )
-;;
 #+END_SRC
 ** man
 #+begin_src elisp
@@ -340,7 +358,6 @@ I always insert a link at the end of a heading, it's annoying
 *** elfeed dashboard
 #+BEGIN_SRC elisp
 (setq elfeed-dashboard-file "~/.doom.d/elfeed_dashboard.org")
-
 #+END_SRC
 * Tools
 ** Vertico
@@ -353,25 +370,20 @@ I always insert a link at the end of a heading, it's annoying
 (use-package blamer
   :defer 20
   :custom
-  (blamer-idle-time 0.3)
-  (blamer-min-offset 70)
+  (blamer-idle-time 0.5)
+  (blamer-min-offset 0)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
                    :background nil
                    :height 110
-                   :italic t)))
-  :config
-  (global-blamer-mode 1))
+                   :italic t))))
 #+end_src
-
 * window transpose
 #+BEGIN_SRC elisp
 (map! :map 'evil-window-map "t" #'transpose-frame)
-
 #+END_SRC
 * avy
 #+BEGIN_SRC elisp
 (map! :nvei "C-." #'avy-goto-char-2)
 (map! :nvei "C->" #'avy-resume)
-
 #+end_src
