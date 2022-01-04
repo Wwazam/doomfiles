@@ -85,8 +85,9 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 *** todo keywords
 #+begin_src elisp
 (setq org-todo-keywords
-      '((sequence "STRT(s)" "TODO(t)" "IDEA(i@)" "PROJ(p@)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "KILL(k@)")
-        (sequence "[!](T)" "[?](Q)" "|" "[X](D)")))
+      '((sequence "STRT(s)" "TODO(t)" "IDEA(i)" "PROJ(p)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "KILL(k@)")
+        (sequence "[!](T)" "[?](Q)" "|" "[X](D)")
+        (sequence "ALLISON(a)")))
 #+end_src
 
 **** log into drawer
