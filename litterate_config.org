@@ -1,12 +1,11 @@
 :PROPERTIES:
-:HEADER_ARGS: :results none
+:header-args: :results none
 :END:
 #+TITLE: Litterate Configuration
 
 * Intro
 #+begin_src elisp
 (setq byte-compile-warnings '(cl-functions))
-
 #+END_SRC
 ** random keybindings
 #+begin_src elisp
