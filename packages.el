@@ -29,3 +29,5 @@
 (package! flx)
 
 (package! blamer)
+
+(package! org-roam-bibtex)

@@ -93,23 +93,46 @@ Add dependencies to be able to execute code with =e= with lispy
 #+end_src
 
 ** Org
-*** todo keywords
+*** Variables
+**** Todo keywords
 #+begin_src elisp
 (setq org-todo-keywords
       '((sequence "STRT(s)" "TODO(t)" "IDEA(i)" "PROJ(p)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "KILL(k@)")
+        (sequence "HABIT(H)" "READ(R)")
         (sequence "[!](T)" "[?](Q)" "|" "[X](D)")
-        (sequence "ALLISON(a)")))
+        (sequence "ALLISON(a)" "|")))
 #+end_src
 
-**** log into drawer
+***** log into drawer
 #+begin_src elisp
 (setq org-log-into-drawer 't)
 #+end_src
-*** Org directory
+***** todo faces
+[[file:~/.emacs.d/modules/lang/org/config.el::;; HACK Face specs fed directly to `org-todo-keyword-faces' don't respect][In doom/org/config]]
+
+#+begin_src elisp
+;; declare new face
+(with-no-warnings
+  (custom-declare-face '+org-todo-list '((t (:inherit (bold font-lock-builtin-face org-todo)))) ""))
+
+(setq
+ org-todo-keyword-faces
+ '(("STRT" . +org-todo-active)
+   ("[?]"  . +org-todo-onhold)
+   ("WAIT" . +org-todo-onhold)
+   ("HOLD" . +org-todo-onhold)
+   ("IDEA" . +org-todo-project)
+   ("PROJ" . +org-todo-project)
+   ("ALLISON" . +org-todo-project)
+   ("HABIT" . +org-todo-list)
+   ("READ" . +org-todo-list)
+   ("KILL" . +org-todo-cancel)))
+#+end_src
+**** Org directory
 #+begin_src elisp
 (setq org-directory "~/documents/notes/roam")
 #+end_src
-*** Org-id
+**** Org-id
 #+begin_src elisp
 (setq org-id-locations-file "~/documents/notes/roam/.orgids")
 #+end_src
@@ -118,20 +141,119 @@ Add dependencies to be able to execute code with =e= with lispy
 #+begin_src elisp
 (setq org-agenda-files '("~/documents/notes/roam/daily"))
 #+end_src
+**** Habits
+#+begin_src elisp
+(defun my/org-agenda-habits ())
+
+(defun my/org-agenda-projects ()
+  (org--todo ))
+#+end_src
 **** Agenda Views
+*** Citations
+**** Citar
+#+begin_src elisp
+(after! org
+  (setq! citar-bibliography (list (concat org-directory "/references.bib"))))
+#+end_src
+**** Citation
+#+begin_src elisp
+;; (setq org-capture-templates
+;;       '(("d" "default" plain "%?"
+;;          :if-new (file+head "${slug}.org"
+;;                             "#+title: ${title}\n#+SETUPFILE: ~/bib-lib/setup_file.org\n* References :ignore:\n#+print_bibliography:")
+;;          :unnarrowed t)
+;;         ;; capture to inbox
+;;         ("i" "inbox" entry "* TODO %?\n"
+;;          :target (node "45acaadd-02fb-4b93-a741-45d37ff9fd5e")
+;;          :unnarrowed t
+;;          :empty-lines-before 1
+;;          :empty-lines-after 1
+;;          :prepend t)
+;;         ;; bibliography note template
+;;         ("r" "bibliography reference" plain "%?"
+;;          :if-new (file+head "references/notes_${citekey}.org"
+;;                             "#+title: Notes on ${title}\n#+SETUPFILE: ~/bib-lib/ref_setup_file.org\n* References :ignore:\n#+print_bibliography:")
+;;          :unnarrowed t)
+;;         ;; for my annotated bibliography needs
+;;         ("s" "short bibliography reference (no id)" entry "* ${title} [cite:@%^{citekey}]\n%?"
+;;          :target (node "01af7246-1b2e-42a5-b8e7-68be9157241d")
+;;          :unnarrowed t
+;;          :empty-lines-before 1
+;;          :prepend t)))
+#+end_src
+
+*** Blocks
+**** Today Schedule
+#+begin_src elisp
+(setq bpa-org-agenda-block--today-schedule
+      '(agenda ""
+               ((org-agenda-overriding-header "Today's Schedule:")
+                (org-agenda-span 1)
+                (org-agenda-start-on-weekday nil)
+                (org-agenda-start-day "+0d")
+                (org-agenda-show-log 't)
+                (org-agenda-prefix-format '((agenda . "  %? i%?-12t% s")))
+                (org-agenda-scheduled-leaders '("> " ">> ")))))
+#+end_src
+
+***** define
+#+begin_src elisp :noweb t
+(defvar bpa-org-agenda-block--today-schedule
+  ''(agenda ""
+         ((org-agenda-overriding-header "Today's Schedule:")
+          (org-agenda-span 1)
+          (org-agenda-start-on-weekday nil)
+          (org-agenda-start-day "+0d")
+          (org-agenda-show-log 't)))
+  "A block showing a 1 day schedule.")
+#+end_src
+**** Habits
+#+begin_src elisp
+(setq bpa-org-agenda-block--habits
+  '(tags-todo "TODO=\"HABIT\"+SCHEDULED<\"<+1d>\""
+         ((org-agenda-overriding-header "Habits")
+          (org-agenda-files '("~/documents/notes/roam/20220114125434-habit.org"))
+          (org-agenda-prefix-format '((tags . " ")))
+          (org-agenda-todo-keyword-format ""))))
+#+end_src
+
+**** Past logs
+#+begin_src elisp :results drawer replace
+(defvar bpa-org-agenda-block--past-4-days
+  '(agenda ""
+           ((org-agenda-overriding-header "Past few days")
+            (org-agenda-span 4)
+            (org-agenda-start-on-weekday nil)
+            (org-agenda-start-day "-4d")
+            (org-agenda-skip-scheduled-if-done 't)
+            (org-agenda-show-log 't)
+            (org-agenda-log-mode-items '(clock done state))))
+  "A block showing what I did in the last 4 days.")
+#+end_src
+
+#+RESULTS:
+:results:
+bpa-org-agenda-block--past-4-days
+:end:
+
+***** Updating
+*** Views
+#+name: update-org-agenda-custom-commands
 #+begin_src elisp
 (setq org-agenda-custom-commands
-      '(("n" "Agenda and all TODOs"
+      `(("n" "Agenda and all TODOs"
          ((agenda "")
           (todo "STRT")
           (todo "TODO")
           (todo "WAIT|HOLD")
           (todo "PROJ")
           (todo "IDEA")))
-        ("d" "Diary"
-         ((todo "\[\!\]")
-          (todo "[?]")
-          (todo "[X]")))))
+        ("d" "Daily"
+         (,bpa-org-agenda-block--today-schedule
+          ,bpa-org-agenda-block--habits))
+        ("h" "Habit"
+         ((todo "HABIT"
+                ((org-agenda-files '("~/documents/notes/roam/20220114125434-habit.org"))))))))
 #+end_src
 
 *** Roam
@@ -182,16 +304,16 @@ The map is wrong
 #+end_src
 
 ***** HOLD old Capture try
-#+begin_src
-(setq org-roam-capture-templates
-      '(("d"
-         "default"
-         plain
-         "%?"
-         :if-new (file+head
-                  "%<%Y%m%d%H%M%S>-${slug}.org"
-                  "#+title: ${title}\n\n- tags ::\n\n* Content")
-         :unnarrowed t)))
+#+begin_src elisp
+;; (setq org-roam-capture-templates
+;;       '(("d"
+;;          "default"
+;;          plain
+;;          "%?"
+;;          :if-new (file+head
+;;                   "%<%Y%m%d%H%M%S>-${slug}.org"
+;;                   "#+title: ${title}\n\n- tags ::\n\n* Content")
+;;          :unnarrowed t)))
 #+end_src
 **** No autocompletion all the time
 I always insert a link at the end of a heading, it's annoying
