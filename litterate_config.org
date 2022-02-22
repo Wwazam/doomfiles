@@ -81,6 +81,17 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 
 ;;
 #+END_SRC
+** Clojure
+*** lispy
+Add dependencies to be able to execute code with =e= with lispy
+#+begin_src elisp
+(setq cider-jack-in-dependencies
+                           (delete-dups
+                            (append
+                             cider-jack-in-dependencies
+                             lispy-cider-jack-in-dependencies)))
+#+end_src
+
 ** Org
 *** todo keywords
 #+begin_src elisp
