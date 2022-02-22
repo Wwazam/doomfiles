@@ -85,11 +85,6 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 *** lispy
 Add dependencies to be able to execute code with =e= with lispy
 #+begin_src elisp
-(setq cider-jack-in-dependencies
-                           (delete-dups
-                            (append
-                             cider-jack-in-dependencies
-                             lispy-cider-jack-in-dependencies)))
 #+end_src
 
 ** Org
