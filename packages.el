@@ -31,3 +31,5 @@
 (package! blamer)
 
 (package! org-roam-bibtex)
+
+(package! symex)

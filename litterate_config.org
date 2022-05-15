@@ -41,13 +41,44 @@
 #+begin_src elisp
 (setq doom-font (font-spec :family "hack" :size 16))
 #+end_src
-* Evil
+* Editor
+** Evil
+*** jk to normal mode
 #+BEGIN_SRC elisp
-;; ;; jk to Normal Mode
 (setq-default evil-escape-unordered-key-sequence "jk")
 (setq-default evil-escape-delay 0.5)
 ;;
 #+END_SRC
+
+** Lisp languages
+*** Symex
+**** Init
+#+begin_src elisp
+(symex-initialize)
+#+end_src
+**** key binding
+***** Ret to symex-mode
+#+begin_src elisp
+(map! :mode 'symex-mode
+      :n "RET" #'symex-mode-interface)
+#+end_src
+***** remove jk
+#+begin_src elisp
+(setq-hook! 'symex-mode-hook evil-escape-key-sequence nil)
+(setq-hook! 'symex-mode-hook evil-escape-unordered-key-sequence nil)
+#+end_src
+***** Change hjkl
+#+begin_src elisp
+(map! :mode 'symex-mode
+      :
+
+    )
+#+end_src
+**** cursor
+#+begin_src elisp
+(setq evil-symex-state-cursor 'hollow)
+#+end_src
+
 * Languages
 ** Common Lisp
 *** Change completion type
