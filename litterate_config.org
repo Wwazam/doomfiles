@@ -67,16 +67,13 @@
 (setq-hook! 'symex-mode-hook evil-escape-key-sequence nil)
 (setq-hook! 'symex-mode-hook evil-escape-unordered-key-sequence nil)
 #+end_src
-***** Change hjkl
-#+begin_src elisp
-(map! :mode 'symex-mode
-      :
-
-    )
-#+end_src
+***** TODO Change hjkl
+I want to switch
+- h/l :: to go up and down trees
+- j/k :: left and right in same level
 **** cursor
 #+begin_src elisp
-(setq evil-symex-state-cursor 'hollow)
+(setq evil-symex-state-cursor 'hbar)
 #+end_src
 
 * Languages
@@ -161,6 +158,23 @@ Add dependencies to be able to execute code with =e= with lispy
 **** Org-id
 #+begin_src elisp
 (setq org-id-locations-file "~/documents/notes/roam/.orgids")
+#+end_src
+**** Org tags
+[[id:a5ff5d47-25c5-48ef-af91-f86777c533fd][Using tags to organise projects]]
+
+thanks to schemar [[https://discord.com/channels/406534637242810369/695219268358504458/986926977950830602][Schemar]] on doom emacs discord
+#+begin_src elisp
+(defadvice! schemar/org-set-tags-from-roam (orig-fun &rest args)
+    "Offers tags from org-roam when setting regular org tags.
+
+Org-roam's `org-roam-tag-add' only adds tags to org-roam nodes.
+With this advice, the tag completion offers tags known to
+org-roam when adding regular org tags.
+
+It is much faster than the alternative `(setq org-complete-tags-always-offer-all-agenda-tags t)'"
+    :around #'org-set-tags-command
+    (let ((org-current-tag-alist (mapcar #'list (org-roam-tag-completions))))
+      (apply orig-fun args)))
 #+end_src
 *** Org agenda
 **** Files
