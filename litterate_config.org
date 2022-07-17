@@ -162,6 +162,7 @@ Add dependencies to be able to execute code with =e= with lispy
 **** Org tags
 [[id:a5ff5d47-25c5-48ef-af91-f86777c533fd][Using tags to organise projects]]
 
+***** set the alist for the tag prompt
 thanks to schemar [[https://discord.com/channels/406534637242810369/695219268358504458/986926977950830602][Schemar]] on doom emacs discord
 #+begin_src elisp
 (defadvice! schemar/org-set-tags-from-roam (orig-fun &rest args)
@@ -176,10 +177,33 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
     (let ((org-current-tag-alist (mapcar #'list (org-roam-tag-completions))))
       (apply orig-fun args)))
 #+end_src
+
+***** toggle the tag inheritance
+#+begin_src elisp
+(defun my/toggle-org-tag-inheritance ()
+  (interactive)
+  (setq org-use-tag-inheritance (not org-use-tag-inheritance)))
+
+(after! org-agenda
+  (map! :localleader
+        :map 'org-agenda-mode-map
+        "t" (defun my/toggle-org-tag-inheritance-and-refresh ()
+              (interactive)
+              (my/toggle-org-tag-inheritance)
+              (org-agenda-redo))))
+#+end_src
+***** Add hook when changing property
+#+begin_src elisp
+(add-hook! 'org-after-todo-state-change-hook #'org-id-get-create)
+(add-hook! 'org-after-tags-change-hook #'org-id-get-create)
+(defadvice! add-id-when-creating-timestamp ()
+  :after 'org-time-stamp
+  (org-id-get-create))
+#+end_src
 *** Org agenda
 **** Files
 #+begin_src elisp
-(setq org-agenda-files '("~/documents/notes/roam/daily"))
+(setq org-agenda-files '("~/documents/notes/roam/daily/"))
 #+end_src
 **** Habits
 #+begin_src elisp
@@ -355,14 +379,14 @@ The map is wrong
 ;;                   "#+title: ${title}\n\n- tags ::\n\n* Content")
 ;;          :unnarrowed t)))
 #+end_src
-**** No autocompletion all the time
-I always insert a link at the end of a heading, it's annoying
+**** No autocom
+ end of a heading, it's annoying
 #+begin_src elisp
 (setq org-roam-completion-everywhere nil)
 #+end_src
 ***** HOLD Try to trigger org-roam-node-insert with `[[`
 #+begin_src elisp
-;(map! :i "[[" #'org-roam-node-insert)
+(map! :map 'org-roam-mode-map :i "[[" #'org-roam-node-insert)
 #+end_src
 
 **** Org-roam server
@@ -383,15 +407,6 @@ I always insert a link at the end of a heading, it's annoying
           org-roam-ui-open-on-start t))
 #+end_src
 **** Org-roam-agenda
-***** Add hook when changing todo state
-#+begin_src elisp
-(defun my/org-project-find-id ()
-  (when (equal org-state "PROJ")
-    (org-id-get-create)))
-
-(add-hook! 'org-after-todo-state-change-hook #'my/org-project-find-id)
-
-#+end_src
 ***** List of files with todo keywords
 #+begin_src elisp
 (defun my/org-roam-agenda-files ()
@@ -431,6 +446,14 @@ I always insert a link at the end of a heading, it's annoying
 (setq org-confirm-babel-evaluate nil)
 ;;
 #+END_SRC
+*** Org-ql
+**** Silence annoying warning
+#+begin_src elisp
+(defadvice! silence-annoying-warning (fun &rest args)
+  :around  #'org-ql--select
+  (let ((standard-output 'ignore))
+    (apply fun args)))
+#+end_src
 *** Other
 #+BEGIN_SRC elisp
 ;; ;; Directory

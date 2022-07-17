@@ -33,3 +33,5 @@
 (package! org-roam-bibtex)
 
 (package! symex)
+
+(package! org-ql)
