@@ -211,11 +211,12 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
 #+end_src
 ***** Add hook when changing property
 #+begin_src elisp
-(add-hook! 'org-after-todo-state-change-hook #'org-id-get-create)
-(add-hook! 'org-after-tags-change-hook #'org-id-get-create)
-(defadvice! add-id-when-creating-timestamp (&rest _)
-  :after 'org-time-stamp
-  (org-id-get-create))
+(after! org
+  (add-hook! 'org-after-todo-state-change-hook #'org-id-get-create)
+  (add-hook! 'org-after-tags-change-hook #'org-id-get-create)
+  (defadvice! add-id-when-creating-timestamp (&rest _)
+    :after #'org-time-stamp
+    (org-id-get-create)))
 #+end_src
 *** Org agenda
 **** Files
