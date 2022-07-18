@@ -373,18 +373,43 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 #+end_src
 
-**** TODO Capture templates
-The map is wrong
+**** Org-Capture
+***** Add Capture templates
+****** Template Makeer
 #+begin_src elisp
-(defun my/org-roam-capture-inbox ()
-  (interactive)
-  (org-roam-capture- :node (org-roam-node-create)
-                     :templates '(("i" "inbox" plain "* %?"
-                                  :if-new (file+head "Inbox.org" "#+title: Inbox\n")))))
-
-(map! :map 'doom-leader-notes-map "i" #'my/org-roam-capture-inbox )
+(defun field-name (name)
+  (format "#+%s: ${%s}\n" name name))
+(defun reference-template (letter name fields)
+  (let* ((downcase-name (downcase name))
+         (directory-path (concat "reference/" downcase-name "/%<%Y%m%d%H%M%S>-${slug}.org"))
+         (field-str (seq-reduce #'concat
+                                (mapcar #'field-name fields)
+                                ""))
+         (target (list 'file+head directory-path field-str)))
+    (list letter name 'plain "* %?"
+          :target target)))
+#+end_src
+****** Reference templates
+#+name: reference_templates
+#+begin_src elisp 
+'(("r" "Reference")
+  ("ra" "Article" plain "\%?"
+   :target (file+head "reference/article/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+author: ${author}\n#+source: ${source}\n#+date: %^{date}t"))
+  ("rb" "Book" plain "\%?"
+   :target (file+head "reference/book/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+author: ${author}\n#+year: ${year}")))
 #+end_src
 
+****** Setting the variable
+#+headers: :var ref=reference_templates()
+#+begin_src elisp 
+(setq org-roam-capture-templates
+      (append ref))
+#+end_src
+
+***** Re map =SPC n n=
+#+begin_src elisp
+(map! :map 'doom-leader-notes-map "n" #'org-roam-capture)
+#+end_src
 **** No autocom
  end of a heading, it's annoying
 #+begin_src elisp
