@@ -386,15 +386,15 @@ The map is wrong
 
 ***** HOLD old Capture try
 #+begin_src elisp
-;; (setq org-roam-capture-templates
-;;       '(("d"
-;;          "default"
-;;          plain
-;;          "%?"
-;;          :if-new (file+head
-;;                   "%<%Y%m%d%H%M%S>-${slug}.org"
-;;                   "#+title: ${title}\n\n- tags ::\n\n* Content")
-;;          :unnarrowed t)))
+(setq org-roam-capture-templates
+      '(("d"
+         "default"
+         plain
+         "%?"
+         :if-new (file+head
+                  "%<%Y%m%d%H%M%S>-${slug}.org"
+                  "#+title: ${title}")
+         :unnarrowed t)))
 #+end_src
 **** No autocom
  end of a heading, it's annoying
