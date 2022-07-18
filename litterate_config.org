@@ -34,7 +34,7 @@
   (random t)  ; randomazing
   (load-theme (nth (random (length theme-list)) theme-list) t))
 
-(random-theme)
+;; (random-theme)
 ;;
 #+END_SRC
 ** Font
@@ -113,6 +113,23 @@ Sly simple completion seems to be broken beyond repair, let's use fuzzy search!
 *** lispy
 Add dependencies to be able to execute code with =e= with lispy
 #+begin_src elisp
+;; (setq cider-jack-in-dependencies
+;;       (delete-dups
+;;        (append
+;;         cider-jack-in-dependencies
+;;         lispy-cider-jack-in-dependencies)))
+#+end_src
+*** symex
+#+begin_src elisp
+(use-package! symex
+  :hook ((lisp-mode . symex-mode)
+         (clojure-mode . symex-mode))
+  :config
+  (symex-initialize)
+  (map! :map (lisp-mode-map
+              clojure-mode-map)
+        :n "<return>" #'symex-mode-interface)
+  (lispy-mode))
 #+end_src
 
 ** Org
@@ -430,9 +447,9 @@ The map is wrong
 *** Babel
 **** Elm
 #+begin_src elisp
-(org-babel-do-load-languages
-   'org-babel-load-languages
-   '((elm . t)))
+;; (org-babel-do-load-languages
+;;    'org-babel-load-languages
+;;    '((elm . t)))
 #+end_src
 **** Tangle on save
 #+begin_src elisp
