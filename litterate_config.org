@@ -390,20 +390,27 @@ Supports `org-roam' filenames by chopping prefix cookie."
           :target target)))
 #+end_src
 ****** Reference templates
-#+name: reference_templates
-#+begin_src elisp 
-'(("r" "Reference")
-  ("ra" "Article" plain "\%?"
-   :target (file+head "reference/article/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+author: ${author}\n#+source: ${source}\n#+date: %^{date}t"))
-  ("rb" "Book" plain "\%?"
-   :target (file+head "reference/book/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+author: ${author}\n#+year: ${year}")))
+#+name: reference-templates
+#+begin_src elisp
+(list
+ (reference-template "ra" "Article" [title author source date])
+ (reference-template "rb" "Book" [title author year])
+ (reference-template "rg" "Game" [title developper year])
+ (reference-template "rm" "Movie" [title director year])
+ (reference-template "rv" "Video" [title author source]))
 #+end_src
 
 ****** Setting the variable
-#+headers: :var ref=reference_templates()
+#+headers: :var ref=reference-templates
 #+begin_src elisp 
 (setq org-roam-capture-templates
-      (append ref))
+      (list (list "r" "reference")
+            (reference-template "ra" "Article" [title author source date])
+            (reference-template "rb" "Book" [title author year])
+            (reference-template "rg" "Game" [title developper year])
+            (reference-template "rm" "Movie" [title director year])
+            (reference-template "rp" "Podcast" [title author podcast])
+            (reference-template "rv" "Video" [title author source])))
 #+end_src
 
 ***** Re map =SPC n n=
