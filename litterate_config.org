@@ -223,6 +223,10 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
 #+begin_src elisp
 (setq org-agenda-files '("~/documents/notes/roam/inbox.org" "~/documents/notes/roam/work/" "~/documents/notes/roam/errands/" "~/documents/notes/roam/home/" "~/documents/notes/roam/computer/"))
 #+end_src
+**** Keymap
+#+begin_src elisp
+(map! "C-c a" 'org-agenda)
+#+end_src
 **** Habits
 #+begin_src elisp
 (defun my/org-agenda-habits ())
