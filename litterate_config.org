@@ -218,6 +218,36 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
 ;;     :after #'org-time-stamp
 ;;     (org-id-get-create)))
 #+end_src
+*** Capture
+#+begin_src elisp :lexical t
+(defun visit-file ()
+  (interactive)
+  (let ((path (capture-project-name "work")))
+    (set-buffer (org-capture-target-buffer path))
+    ;; (goto-char (point-max))
+    ;; (org-store-link 1)
+    ))
+(defun todo-template (letter name)
+  (let* ((downcase-name (downcase name)))
+    `(,letter ,name entry (file "inbox.org") (format "* TODO %%? :%s:\n" downcase-name))))
+(setq org-capture-templates
+      `(("t" "Todo")
+        ,(todo-template "tc" "Computer")
+        ,(todo-template "te" "Errand")
+        ,(todo-template "th" "Home")
+        ,(todo-template "tw" "Work")
+        ("p" "Project")
+        ("pt" "Todo" entry (file+headline ,(org-roam-db ) "Tasks"))
+        ))
+
+(defun my/org-roam-filter-by-tag (tag-name)
+  (lambda (node)
+    (member tag-name (org-roam-node-tags node))))
+
+(defun prompt-project ()
+  (interactive)
+  (org-roam-node-read nil (my/org-roam-filter-by-tag "project")))
+#+end_src
 *** Org agenda
 **** Files
 #+begin_src elisp
@@ -380,55 +410,53 @@ Supports `org-roam' filenames by chopping prefix cookie."
 **** Org-Capture
 ***** Add Capture templates
 #+begin_src elisp
-(defun field-name (name)
-  (format "#+%s: ${%s}\n" name name))
+;; (defun field-name (name)
+;;   (format "#+%s: ${%s}\n" name name))
 
-(defun reference-template (letter name fields)
-  (let* ((downcase-name (downcase name))
-         (directory-path (concat "reference/" downcase-name "/%<%Y%m%d%H%M%S>-${slug}.org"))
-         (field-str (seq-reduce #'concat
-                                (mapcar #'field-name fields)
-                                ""))
-         (target (list 'file+head directory-path field-str)))
-    (list letter name 'plain "%?"
-          :target target)))
+;; (defun reference-template (letter name fields)
+;;   (let* ((downcase-name (downcase name))
+;;          (directory-path (concat "reference/" downcase-name "/%<%Y%m%d%H%M%S>-${slug}.org"))
+;;          (field-str (seq-reduce #'concat
+;;                                 (mapcar #'field-name fields)
+;;                                 ""))
+;;          (target (list 'file+head directory-path field-str)))
+;;     (list letter name 'plain "%?"
+;;           :target target)))
 
-(defun todo-template (letter name)
-  (let* ((downcase-name (downcase name)))
-    `(,letter ,name entry (file ,(format "%s/inbox.org" downcase-name)) "* TODO %?\n")))
+;; (defun project-template (letter name)
+;;   (let* ((downcase-name (downcase name)))
+;;     (list letter name 'entry "* TODO %?"
+;;           :target (list 'file+headline (concat "project/" downcase-name "/todo.org") downcase-name))))
 
-(defun project-template (letter name)
-  (let* ((downcase-name (downcase name)))
-    (list letter name 'entry "* TODO %?"
-          :target (list 'file+headline (concat "project/" downcase-name "/todo.org") downcase-name))))
+;; (defun capture-project-name ()
+;;   (let ((name (read-string "Project: "))
+;;         (time (format-time-string "%Y-%m-%d")))
+;;     (format "%s_%s.org" time name)))
 
-(defun capture-project-name (path)
-  (let ((name (read-string "Project: "))
-        (time (format-time-string "%Y-%m-%d")))
-    (format "%s/%s.org" path name)))
+;; (defun visit-file ()
+;;   (interactive)
+;;   (let ((path (capture-project-name)))
+;;     (set-buffer (org-capture-target-buffer path))
+;;     ;; (goto-char (point-max))
+;;     ;; (org-store-link 1)
+;;     ))
 
-(defun visit-file ()
-  (interactive)
-  (let ((path (capture-project-name "work")))
-    (set-buffer (org-capture-target-buffer path))
-    ;; (goto-char (point-max))
-    ;; (org-store-link 1)
-    ))
+
+(defun project-target (olp)
+  `(file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
+                  "\n#+title: ${title}\n#+filetags: :project: %^G \n* Goals\n* Tasks\n"
+                  (,olp)))
 
 (setq org-roam-capture-templates
-     '(("d" "Default" plain "%?"
-              :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-              :unnarrowed t)))
-
-(setq org-capture-templates
-      `(("t" "Todo")
-        ,(todo-template "tc" "Computer")
-        ,(todo-template "te" "Errand")
-        ,(todo-template "th" "Home")
-        ,(todo-template "tw" "Work")
+      `(("d" "Default" plain "%?"
+         :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t)
         ("p" "Project")
-        ("pn" "New" plain (function visit-file) (file "templates/project.org"))))
+        ("pn" "New" entry "* %?"
+         :target ,(project-target "Goals")
+         :unnarrowed t)))
 
+(map! "C-c r" 'org-roam-capture)
 ;; (setq org-roam-capture-templates
 ;;       (list '("d" "Default" plain "%?"
 ;;               :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n"))
@@ -454,7 +482,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
 
 ***** Re map =SPC n n=
 #+begin_src elisp
-(map! :map 'doom-leader-notes-map "n" #'org-roam-capture)
 (map! "C-c c" #'org-capture
       "C-c n" #'org-roam-capture)
 #+end_src
