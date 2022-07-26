@@ -530,6 +530,10 @@ Supports `org-roam' filenames by chopping prefix cookie."
   (let ((standard-output 'ignore))
     (apply fun args)))
 #+end_src
+*** Org-modern
+#+begin_src elisp
+(global-org-modern-mode)
+#+end_src
 *** Other
 #+BEGIN_SRC elisp
 ;; ;; Directory
