@@ -220,6 +220,11 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
 #+end_src
 *** Capture
 #+begin_src elisp :lexical t
+(defun my/org-roam-project-files ()
+  (->> (org-roam-node-list)
+       (-filter (lambda (n) (member "project" (org-roam-node-tags n))))
+       (mapcar 'org-roam-node-file)))
+
 (defun visit-file ()
   (interactive)
   (let ((path (capture-project-name "work")))
@@ -227,18 +232,9 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
     ;; (goto-char (point-max))
     ;; (org-store-link 1)
     ))
+
 (defun todo-template (letter name)
-  (let* ((downcase-name (downcase name)))
-    `(,letter ,name entry (file "inbox.org") (format "* TODO %%? :%s:\n" downcase-name))))
-(setq org-capture-templates
-      `(("t" "Todo")
-        ,(todo-template "tc" "Computer")
-        ,(todo-template "te" "Errand")
-        ,(todo-template "th" "Home")
-        ,(todo-template "tw" "Work")
-        ("p" "Project")
-        ("pt" "Todo" entry (file+headline ,(org-roam-db ) "Tasks"))
-        ))
+  `(,letter ,name entry (file "inbox.org") "* TODO %?  %^G\n"))
 
 (defun my/org-roam-filter-by-tag (tag-name)
   (lambda (node)
@@ -246,7 +242,16 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
 
 (defun prompt-project ()
   (interactive)
-  (org-roam-node-read nil (my/org-roam-filter-by-tag "project")))
+  (let ((node (org-roam-node-read nil (my/org-roam-filter-by-tag "project"))))
+    (org-roam-node-file node)))
+
+(setq org-roam-project-files (my/org-roam-project-files))
+(setq org-capture-templates
+      `(,(todo-template "t" "Todo")
+        ("p" "Project")
+        ("pt" "Todo" entry (file+headline (prompt-project) "Tasks")
+         :refile-targets org-roam-project-files)
+        ))
 #+end_src
 *** Org agenda
 **** Files
