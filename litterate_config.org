@@ -533,7 +533,8 @@ Supports `org-roam' filenames by chopping prefix cookie."
         ("i" "Inbox"
          ((todo ""
                 ((org-agenda-files '("~/documents/notes/roam/inbox.org"))
-                 (org-agenda-overriding-header "Inbox")))))
+                 (org-agenda-overriding-header "Inbox")
+                 (org-agenda-use-tag-inheritance nil)))))
         ("d" "Daily"
          (,bpa-org-agenda-block--today-schedule
           ,bpa-org-agenda-block--habits))
