@@ -256,38 +256,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
 **** Org-Capture
 ***** Add Capture templates
 #+begin_src elisp
-;; (defun field-name (name)
-;;   (format "#+%s: ${%s}\n" name name))
-
-;; (defun reference-template (letter name fields)
-;;   (let* ((downcase-name (downcase name))
-;;          (directory-path (concat "reference/" downcase-name "/%<%Y%m%d%H%M%S>-${slug}.org"))
-;;          (field-str (seq-reduce #'concat
-;;                                 (mapcar #'field-name fields)
-;;                                 ""))
-;;          (target (list 'file+head directory-path field-str)))
-;;     (list letter name 'plain "%?"
-;;           :target target)))
-
-;; (defun project-template (letter name)
-;;   (let* ((downcase-name (downcase name)))
-;;     (list letter name 'entry "* TODO %?"
-;;           :target (list 'file+headline (concat "project/" downcase-name "/todo.org") downcase-name))))
-
-;; (defun capture-project-name ()
-;;   (let ((name (read-string "Project: "))
-;;         (time (format-time-string "%Y-%m-%d")))
-;;     (format "%s_%s.org" time name)))
-
-;; (defun visit-file ()
-;;   (interactive)
-;;   (let ((path (capture-project-name)))
-;;     (set-buffer (org-capture-target-buffer path))
-;;     ;; (goto-char (point-max))
-;;     ;; (org-store-link 1)
-;;     ))
-
-
 (defun project-target (olp)
   `(file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
                   "\n#+title: ${title}\n#+filetags: :project: %^G \n* Goals\n* Tasks\n"
@@ -297,33 +265,10 @@ Supports `org-roam' filenames by chopping prefix cookie."
       `(("d" "Default" plain "%?"
          :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t)
-        ("p" "Project")
-        ("pn" "New" entry "* %?"
-         :target ,(project-target "Goals")
-         :unnarrowed t)))
+        ("p" "Project" entry "%?"
+         :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "\n#+title: ${title}\n#+filetags: :project: %^G \n* Goals\n* Tasks\n"))))
 
 (map! "C-c r" 'org-roam-capture)
-;; (setq org-roam-capture-templates
-;;       (list '("d" "Default" plain "%?"
-;;               :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n"))
-;;             '("r" "Reference")
-;;             (reference-template "ra" "Article" [title author source date])
-;;             (reference-template "rb" "Book" [title author year])
-;;             (reference-template "rg" "Game" [title developper year])
-;;             (reference-template "rm" "Movie" [title director year])
-;;             (reference-template "rp" "Podcast" [title author podcast])
-;;             (reference-template "rv" "Video" [title author source])
-;;             '("t" "Todo")
-;;             (todo-template "tc" "Computer")
-;;             (todo-template "te" "Errand")
-;;             (todo-template "th" "Home")
-;;             (todo-template "tw" "Work")
-;;             '("p" "Project")
-;;             (project-template "pc" "Computer")
-;;             (project-template "pe" "Errand")
-;;             (project-template "ph" "Home")
-;;             (project-template "pw" "Work")
-;;             ))
 #+end_src
 
 ***** Re map =SPC n n=
@@ -454,21 +399,16 @@ Supports `org-roam' filenames by chopping prefix cookie."
                 (org-agenda-start-on-weekday nil)
                 (org-agenda-start-day "+0d")
                 (org-agenda-show-log 't)
-                (org-agenda-prefix-format '((agenda . "  %? i%?-12t% s")))
                 (org-agenda-scheduled-leaders '("> " ">> "))
                 (org-agenda-time-grid '((daily today remove-match) (900 1100 1300 1500 1700) ". . ." "----------------")))))
 #+end_src
 
-***** define
-#+begin_src elisp :noweb t
-(defvar bpa-org-agenda-block--today-schedule
-  '(agenda ""
-           ((org-agenda-overriding-header "Today's Schedule:")
-            (org-agenda-span 1)
-            (org-agenda-start-on-weekday nil)
-            (org-agenda-start-day "+0d")
-            (org-agenda-show-log 't)))
-  "A block showing a 1 day schedule.")
+**** Started tasks
+#+begin_src elisp
+(setq bpa-org-agenda-block--started-tasks
+      '(todo "STRT"
+             ((org-agenda-overriding-header "Started tasks")
+              (org-agenda-files (my/org-roam-project-files)))))
 #+end_src
 **** Habits
 #+begin_src elisp
@@ -479,9 +419,20 @@ Supports `org-roam' filenames by chopping prefix cookie."
           (org-agenda-prefix-format '((tags . " ")))
           (org-agenda-todo-keyword-format ""))))
 #+end_src
-
+**** Previous day
+#+begin_src elisp
+(setq bpa-org-agenda-block--previous-day
+      '(agenda ""
+               ((org-agenda-overriding-header "Yesterday")
+                (org-agenda-span 1)
+                (org-agenda-start-day "-1d")
+                (org-agenda-scheduled-leaders '("> " ">> "))
+                (org-agenda-time-grid '((daily today remove-match) (900 1100 1300 1500 1700) "....." "----------------"))
+                (org-agenda-show-log 't)
+                (org-agenda-log-mode-items '(clock done state)))))
+#+end_src
 **** Past logs
-#+begin_src elisp :results drawer replace
+#+begin_src elisp
 (defvar bpa-org-agenda-block--past-4-days
   '(agenda ""
            ((org-agenda-overriding-header "Past few days")
@@ -493,8 +444,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
             (org-agenda-log-mode-items '(clock done state))))
   "A block showing what I did in the last 4 days.")
 #+end_src
-
-#+RESULTS:
 
 ***** Updating
 *** Views
@@ -515,7 +464,10 @@ Supports `org-roam' filenames by chopping prefix cookie."
                  (org-agenda-use-tag-inheritance nil)))))
         ("d" "Daily"
          (,bpa-org-agenda-block--today-schedule
-          ,bpa-org-agenda-block--habits))
+          ,bpa-org-agenda-block--started-tasks))
+        ("s" "Standup"
+         (,bpa-org-agenda-block--previous-day
+          ,bpa-org-agenda-block--today-schedule))
         ("h" "Habit"
          ((todo "HABIT"
                 ((org-agenda-files '("~/documents/notes/roam/20220114125434-habit.org"))))))))
