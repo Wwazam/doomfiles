@@ -358,28 +358,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 #+end_src
-**** Org-roam-agenda
-***** List of files with todo keywords
-#+begin_src elisp
-(defun my/org-roam-agenda-files ()
-  (->> (org-roam-node-list)
-       (seq-filter #'org-roam-node-todo)
-       (mapcar #'org-roam-node-file)))
-#+end_src
-
-***** Map to roam agenda view
-#+begin_src elisp
-(defun my/org-roam-agenda ()
-  (interactive)
-  (let ((org-agenda-files (mapcar #'org-roam-node-file
-                                (seq-filter #'org-roam-node-todo (org-roam-node-list)))))
-    (org-todo-list 2)))
-
-(map! :map 'doom-leader-notes-map
-      (:prefix ("p" . "project")
-       "t" #'my/org-roam-agenda))
-#+end_src
-
 *** Capture
 #+begin_src elisp :lexical t
 (defun my/org-roam-project-files ()
