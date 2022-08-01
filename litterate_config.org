@@ -319,7 +319,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
     ))
 
 (defun todo-template (letter name)
-  `(,letter ,name entry (file "inbox.org") "* TODO %?  %^G\n"))
+  `(,letter ,name entry (file "~/documents/notes/roam/inbox.org") "* TODO %?  %^G\n"))
 
 (defun my/org-roam-filter-by-tag (tag-name)
   (lambda (node)
@@ -444,8 +444,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
             (org-agenda-log-mode-items '(clock done state))))
   "A block showing what I did in the last 4 days.")
 #+end_src
-
-***** Updating
 *** Views
 #+name: update-org-agenda-custom-commands
 #+begin_src elisp
