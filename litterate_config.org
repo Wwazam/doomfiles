@@ -306,9 +306,10 @@ Supports `org-roam' filenames by chopping prefix cookie."
 *** Capture
 #+begin_src elisp :lexical t
 (defun my/org-roam-project-files ()
-  (->> (org-roam-node-list)
-       (-filter (lambda (n) (member "project" (org-roam-node-tags n))))
-       (mapcar 'org-roam-node-file)))
+    (->> (org-roam-node-list)
+         (-filter (lambda (n) (member "project" (org-roam-node-tags n))))
+         (mapcar 'org-roam-node-file)
+         (-distinct)))
 
 (defun visit-file ()
   (interactive)
