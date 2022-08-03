@@ -360,6 +360,21 @@ Supports `org-roam' filenames by chopping prefix cookie."
   (org--todo ))
 #+end_src
 **** Agenda Views
+**** Clock check
+#+begin_src elisp
+(setq org-agenda-clock-consistency-checks
+      '(:max-duration "10:00"
+        :min-duration 0
+        :max-gap "0:15"
+        :gap-ok-around ("8:00" "12:30" "13:45" "18:00")
+        :default-face ((:background "DarkRed")
+                       (:foreground "white"))
+        :overlap-face nil
+        :gap-face nil
+        :no-end-time-face nil
+        :long-face nil
+        :short-face nil))
+#+end_src
 *** Citations
 **** Citar
 #+begin_src elisp
