@@ -342,8 +342,11 @@ Supports `org-roam' filenames by chopping prefix cookie."
 *** Org agenda
 **** Files
 #+begin_src elisp
-(setq org-agenda-files (append (list "~/documents/notes/roam/inbox.org")
-                               org-roam-project-files))
+(defun bpa/org-agenda-refresh-files! ()
+  (interactive)
+  (setq org-agenda-files (append (list "~/documents/notes/roam/inbox.org")
+                               (my/org-roam-project-files))))
+(bpa/org-agenda-refresh-files!)
 #+end_src
 **** Keymap
 #+begin_src elisp
