@@ -35,4 +35,3 @@
 (package! symex)
 
 (package! org-ql)
-(package! org-modern)
