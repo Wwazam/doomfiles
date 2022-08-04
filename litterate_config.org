@@ -533,12 +533,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
         (search . " %i %-12:(+org-entry-category)")))
 
 #+END_SRC
-** php
-#+BEGIN_SRC elisp
-(setq! lsp-clients-php-server-command
-       (expand-file-name "~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
-
-       #+END_SRC
 ** python
 #+BEGIN_SRC elisp
 (setq-hook! 'python-mode-hook +format-with-lsp t)
