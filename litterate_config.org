@@ -587,15 +587,16 @@ Supports `org-roam' filenames by chopping prefix cookie."
 #+end_src
 ** Blamer
 #+begin_src elisp
+(global-blamer-mode)
 (use-package blamer
   :defer 20
   :custom
-  (blamer-idle-time 0.5)
-  (blamer-min-offset 0)
+  (blamer-idle-time 0.1)
+  (blamer-min-offset 35)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
                    :background nil
-                   :height 110
+                   :height 95
                    :italic t))))
 #+end_src
 * window transpose
