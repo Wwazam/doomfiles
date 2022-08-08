@@ -4,6 +4,11 @@
 #+TITLE: Litterate Configuration
 
 * Intro
+** lexical binding
+#+begin_src elisp
+;; -*- lexical-binding: t -*-
+#+end_src
+** Byte compile warnings
 #+begin_src elisp
 (setq byte-compile-warnings '(cl-functions))
 #+END_SRC
