@@ -495,23 +495,9 @@ Supports `org-roam' filenames by chopping prefix cookie."
 #+end_src
 
 *** Babel
-**** Elm
-#+begin_src elisp
-;; (org-babel-do-load-languages
-;;    'org-babel-load-languages
-;;    '((elm . t)))
-#+end_src
-**** Tangle on save
-#+begin_src elisp
-;; (add-hook! 'org-mode-hook
-;;   (add-hook! 'after-save-hook (org-babel-tangle))
-;;   )
-#+end_src
 **** Don't ask to execute code blocks
 #+BEGIN_SRC elisp
-
 (setq org-confirm-babel-evaluate nil)
-;;
 #+END_SRC
 *** Org-ql
 **** Silence annoying warning
