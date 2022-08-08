@@ -284,8 +284,9 @@ Supports `org-roam' filenames by chopping prefix cookie."
       `(("d" "Default" plain "%?"
          :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t)
-        ("p" "Project" entry "%?"
-         :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "\n#+title: ${title}\n#+filetags: :project: %^G \n* Goals\n* Tasks\n"))))
+        ("p" "Project" plain "%?"
+         :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project: %^G \n* Goals\n* Tasks\n")
+         :unnarrowed t)))
 
 #+end_src
 
