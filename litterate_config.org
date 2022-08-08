@@ -287,13 +287,13 @@ Supports `org-roam' filenames by chopping prefix cookie."
         ("p" "Project" entry "%?"
          :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "\n#+title: ${title}\n#+filetags: :project: %^G \n* Goals\n* Tasks\n"))))
 
-(map! "C-c r" 'org-roam-capture)
 #+end_src
 
-***** Re map =SPC n n=
+***** Org-roam capture map
 #+begin_src elisp
-(map! "C-c c" #'org-capture
-      "C-c n" #'org-roam-capture)
+(map! (:prefix-map ("C-c r" . "Org-Roam")
+       :desc "Capture a new note"       "c" #'org-roam-capture
+       :desc "Find a project"           "p" #'bpa/org-goto-project-heading))
 #+end_src
 **** No autocom
  end of a heading, it's annoying
@@ -324,7 +324,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 #+end_src
 *** Capture
 #+begin_src elisp :lexical t
-(defun my/org-roam-project-files ()
+(defun bpa/org-roam-project-files ()
     (->> (org-roam-node-list)
          (-filter (lambda (n) (member "project" (org-roam-node-tags n))))
          (mapcar 'org-roam-node-file)
@@ -341,21 +341,15 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (defun todo-template (letter name)
   `(,letter ,name entry (file "~/documents/notes/roam/inbox.org") "* TODO %?  %^G\n"))
 
-(defun my/org-roam-filter-by-tag (tag-name)
-  (lambda (node)
-    (member tag-name (org-roam-node-tags node))))
-
-(defun prompt-project ()
-  (interactive)
-  (let ((node (org-roam-node-read nil (my/org-roam-filter-by-tag "project"))))
-    (org-roam-node-file node)))
-
-(setq org-roam-project-files (my/org-roam-project-files))
+(setq org-roam-project-files (bpa/org-roam-project-files))
 (setq org-capture-templates
       `(,(todo-template "t" "Todo")
         ("p" "Project")
-        ("pt" "Todo" entry (file+headline prompt-project "Tasks"))
-        ))
+        ("pt" "Todo" entry (file+headline bpa/prompt-project "Tasks"))))
+#+end_src
+**** Org-capture map
+#+begin_src elisp
+(map! "C-c c" #'org-capture)
 #+end_src
 *** Org agenda
 **** Files
