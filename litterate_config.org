@@ -257,7 +257,21 @@ Supports `org-roam' filenames by chopping prefix cookie."
   (s-chop-prefix (car (s-match prefix s)) s))
 
 #+end_src
+**** Project management
+#+begin_src elisp
+(defun my/org-roam-filter-by-tag (tag-name)
+  (lambda (node)
+    (member tag-name (org-roam-node-tags node))))
 
+(defun bpa/prompt-project ()
+  (interactive)
+  (let ((node (org-roam-node-read nil (my/org-roam-filter-by-tag "project"))))
+    (org-roam-node-file node)))
+
+(defun bpa/org-goto-project-heading ()
+  (interactive)
+  (consult-org-heading nil (list (bpa/prompt-project))))
+#+end_src
 **** Org-Capture
 ***** Add Capture templates
 #+begin_src elisp
