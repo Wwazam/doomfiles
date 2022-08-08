@@ -365,14 +365,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
 #+begin_src elisp
 (map! "C-c a" 'org-agenda)
 #+end_src
-**** Habits
-#+begin_src elisp
-(defun my/org-agenda-habits ())
-
-(defun my/org-agenda-projects ()
-  (org--todo ))
-#+end_src
-**** Agenda Views
 **** Clock check
 #+begin_src elisp
 (setq org-agenda-clock-consistency-checks
