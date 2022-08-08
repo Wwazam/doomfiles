@@ -257,8 +257,22 @@ Supports `org-roam' filenames by chopping prefix cookie."
   (s-chop-prefix (car (s-match prefix s)) s))
 
 #+end_src
-**** Project management
+**** Utils
 #+begin_src elisp
+(defun extract-group (regx n str)
+  (string-match regx str)
+  (match-string n str))
+
+(defun bpa/roam-get-category-from-file-name (file-name)
+  (->> file-name
+       file-name-nondirectory
+       (extract-group  (rx (* (or digit "-"))
+                           (group (* (any "A-Za-z0-9-_")))
+                           ".org")
+                       1)))
+#+end_src
+**** Project management
+#+begin_src elisp :lexical t
 (defun bpa/org-roam-filter-by-tag (tag-name)
   (lambda (node)
     (member tag-name (org-roam-node-tags node))))
@@ -359,6 +373,12 @@ Supports `org-roam' filenames by chopping prefix cookie."
   (interactive)
   (setq org-agenda-files (append (list "~/documents/notes/roam/inbox.org")
                                (bpa/org-roam-project-files))))
+#+end_src
+**** Refresh agenda list on agenda command
+#+begin_src elisp
+(defadvice! bpa/refresh-agenda-files (&rest _)
+  :before #'org-agenda
+  (bpa/org-agenda-refresh-files!))
 #+end_src
 **** Keymap
 #+begin_src elisp
