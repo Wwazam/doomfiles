@@ -270,6 +270,60 @@ Supports `org-roam' filenames by chopping prefix cookie."
                            (group (* (any "A-Za-z0-9-_")))
                            ".org")
                        1)))
+(defun bpa/shorten-name (name)
+  ())
+
+(bpa/org-roam-project-files)
+(let ((a "cinke_o.org"))
+  (cond ((< (length a) 19) a)
+        (:t nil)))
+(defun count-vowels (str)
+  (--> str
+       (string-to-list it)
+       (-filter (lambda (c) (member c (string-to-list "aeiouy"))) it)
+       (length it)))
+
+(defun raise (f)
+  `((:smash . ,f)
+    (:removable . [])))
+
+
+(defun bind (m1 m2)
+  (cons (->> m2
+             (assoc :smash)
+             cdr)
+        (->> m2
+             (assoc :smash )
+             cdr)))
+
+(bind  (raise 'raise)
+       (raise 'raise))
+
+(let* ((a "11_rue_des_peupliers")
+       (b (split-string a "_")))
+  (->> b
+       (-map 'count-vowels)))
+'(("bob_cd")
+  ("org_agenda")
+  ("hosts_igi")
+  ("IGI")
+  ("healthcare")
+  ("hosts_cko")
+  ("cleanup_igi_adaje")
+  ("acces_enedis")
+  ("mon_bi_c")
+  ("computer-setup")
+  ("sudoku_solver")
+  ("11_rue_des_peupliers")
+  ("transition-devops")
+  ("soft-id")
+  ("litterate_programming")
+  ("migration_redhat_7")
+  ("test_clj_cli")
+  ("formations_enedis")
+  ("post_mep_01_08")
+  ("debug-cles-compteurs")
+  ("home_server"))
 #+end_src
 **** Project management
 #+begin_src elisp :lexical t
