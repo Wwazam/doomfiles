@@ -202,16 +202,16 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
 
 ***** toggle the tag inheritance
 #+begin_src elisp
-(defun my/toggle-org-tag-inheritance ()
+(defun bpa/toggle-org-tag-inheritance ()
   (interactive)
   (setq org-use-tag-inheritance (not org-use-tag-inheritance)))
 
 (after! org-agenda
   (map! :localleader
         :map 'org-agenda-mode-map
-        "t" (defun my/toggle-org-tag-inheritance-and-refresh ()
+        "t" (defun bpa/toggle-org-tag-inheritance-and-refresh ()
               (interactive)
-              (my/toggle-org-tag-inheritance)
+              (bpa/toggle-org-tag-inheritance)
               (org-agenda-redo))))
 #+end_src
 ***** Add hook when changing property
@@ -259,13 +259,13 @@ Supports `org-roam' filenames by chopping prefix cookie."
 #+end_src
 **** Project management
 #+begin_src elisp
-(defun my/org-roam-filter-by-tag (tag-name)
+(defun bpa/org-roam-filter-by-tag (tag-name)
   (lambda (node)
     (member tag-name (org-roam-node-tags node))))
 
 (defun bpa/prompt-project ()
   (interactive)
-  (let ((node (org-roam-node-read nil (my/org-roam-filter-by-tag "project"))))
+  (let ((node (org-roam-node-read nil (bpa/org-roam-filter-by-tag "project"))))
     (org-roam-node-file node)))
 
 (defun bpa/org-goto-project-heading ()
@@ -358,8 +358,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (defun bpa/org-agenda-refresh-files! ()
   (interactive)
   (setq org-agenda-files (append (list "~/documents/notes/roam/inbox.org")
-                               (my/org-roam-project-files))))
-(bpa/org-agenda-refresh-files!)
+                               (bpa/org-roam-project-files))))
 #+end_src
 **** Keymap
 #+begin_src elisp
@@ -432,7 +431,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (setq bpa-org-agenda-block--started-tasks
       '(todo "STRT"
              ((org-agenda-overriding-header "Started tasks")
-              (org-agenda-files (my/org-roam-project-files)))))
+              (org-agenda-files (bpa/org-roam-project-files)))))
 #+end_src
 **** Habits
 #+begin_src elisp
