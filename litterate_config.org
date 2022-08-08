@@ -335,8 +335,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (setq org-capture-templates
       `(,(todo-template "t" "Todo")
         ("p" "Project")
-        ("pt" "Todo" entry (file+headline (prompt-project) "Tasks")
-         :refile-targets org-roam-project-files)
+        ("pt" "Todo" entry (file+headline prompt-project "Tasks"))
         ))
 #+end_src
 *** Org agenda
