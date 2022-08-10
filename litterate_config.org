@@ -426,7 +426,8 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (defun bpa/org-agenda-refresh-files! ()
   (interactive)
   (setq org-agenda-files (append (list "~/documents/notes/roam/inbox.org")
-                               (bpa/org-roam-project-files))))
+                               (bpa/org-roam-project-files)))
+  (org-agenda-prepare-buffers org-agenda-files))
 #+end_src
 **** Refresh agenda list on agenda command
 #+begin_src elisp
