@@ -267,7 +267,6 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (defun bpa/shorten-name (name)
   ())
 
-(bpa/org-roam-project-files)
 (let ((a "cinke_o.org"))
   (cond ((< (length a) 19) a)
         (:t nil)))
@@ -502,6 +501,12 @@ Supports `org-roam' filenames by chopping prefix cookie."
              ((org-agenda-overriding-header "Started tasks")
               (org-agenda-files (bpa/org-roam-project-files)))))
 #+end_src
+**** Started, Next and Todo
+#+begin_src elisp
+(setq bpa-org-agenda-block--strt-next-todo
+      '(todo "STRT|NEXT"
+             ((org-agenda-overriding-header "Tasks"))))
+#+end_src
 **** Habits
 #+begin_src elisp
 (setq bpa-org-agenda-block--habits
@@ -554,10 +559,13 @@ Supports `org-roam' filenames by chopping prefix cookie."
                  (org-agenda-use-tag-inheritance nil)))))
         ("d" "Daily"
          (,bpa-org-agenda-block--today-schedule
-          ,bpa-org-agenda-block--started-tasks))
+          ,bpa-org-agenda-block--strt-next-todo
+          (todo "WAIT|HOLD" ((org-agenda-overriding-header "Things to check on")))
+          (todo "TODO" ((org-agenda-overriding-header "Things to do ")))))
         ("s" "Standup"
          (,bpa-org-agenda-block--previous-day
-          ,bpa-org-agenda-block--today-schedule))
+          ,bpa-org-agenda-block--today-schedule
+          ,bpa-org-agenda-block--strt-next-todo))
         ("h" "Habit"
          ((todo "HABIT"
                 ((org-agenda-files '("~/documents/notes/roam/20220114125434-habit.org"))))))))
