@@ -142,10 +142,7 @@ Add dependencies to be able to execute code with =e= with lispy
 **** Todo keywords
 #+begin_src elisp
 (setq org-todo-keywords
-      '((sequence "STRT(s)" "TODO(t)" "IDEA(i)" "PROJ(p)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "KILL(k@)")
-        (sequence "HABIT(H)" "READ(R)")
-        (sequence "[!](T)" "[?](Q)" "|" "[X](D)")
-        (sequence "ALLISON(a)" "|")))
+      '((sequence "STRT(s!)" "NEXT(n!)" "TODO(t)" "IDEA(i)"  "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "KILL(k@)")))
 #+end_src
 
 ***** log into drawer
@@ -158,19 +155,16 @@ Add dependencies to be able to execute code with =e= with lispy
 #+begin_src elisp
 ;; declare new face
 (with-no-warnings
-  (custom-declare-face '+org-todo-list '((t (:inherit (bold font-lock-builtin-face org-todo)))) ""))
+  (custom-declare-face '+org-todo-list '((t (:inherit (bold font-lock-builtin-face org-todo)))) "")
+  (custom-declare-face '+org-todo-next '((t (:inherit (bold font-lock-keyword-face org-todo)))) ""))
 
 (setq
  org-todo-keyword-faces
  '(("STRT" . +org-todo-active)
-   ("[?]"  . +org-todo-onhold)
+   ("NEXT" . +org-todo-next)
    ("WAIT" . +org-todo-onhold)
    ("HOLD" . +org-todo-onhold)
    ("IDEA" . +org-todo-project)
-   ("PROJ" . +org-todo-project)
-   ("ALLISON" . +org-todo-project)
-   ("HABIT" . +org-todo-list)
-   ("READ" . +org-todo-list)
    ("KILL" . +org-todo-cancel)))
 #+end_src
 **** Org directory
@@ -549,9 +543,9 @@ Supports `org-roam' filenames by chopping prefix cookie."
       `(("n" "Agenda and all TODOs"
          ((agenda "")
           (todo "STRT")
+          (todo "NEXT")
           (todo "TODO")
           (todo "WAIT|HOLD")
-          (todo "PROJ")
           (todo "IDEA")))
         ("i" "Inbox"
          ((todo ""
