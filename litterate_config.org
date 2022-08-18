@@ -576,6 +576,10 @@ Supports `org-roam' filenames by chopping prefix cookie."
 #+BEGIN_SRC elisp
 (setq org-confirm-babel-evaluate nil)
 #+END_SRC
+*** Pandoc import
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-pandoc-import :after org)
+#+end_src
 *** Org-ql
 **** Silence annoying warning
 #+begin_src elisp
