@@ -670,6 +670,14 @@ Supports `org-roam' filenames by chopping prefix cookie."
                    :height 95
                    :italic t))))
 #+end_src
+** Ediff
+*** Remove `variant` markers when combining diffs
+#+begin_src elisp
+(defadvice! bpa/ediff-remove-variant-markers (fun &rest args)
+  :around #'ediff-combine-diffs
+  (let ((ediff-combination-pattern '("" A "" B  "" Ancestor "")))
+    (apply fun args)))
+#+end_src
 * window transpose
 #+BEGIN_SRC elisp
 (map! :map 'evil-window-map "t" #'transpose-frame)
