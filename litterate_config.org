@@ -577,7 +577,7 @@ Supports `org-roam' filenames by chopping prefix cookie."
 (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 *** Pandoc import
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (use-package! org-pandoc-import :after org)
 #+end_src
 *** Org-ql
