@@ -604,6 +604,13 @@ Supports `org-roam' filenames by chopping prefix cookie."
         (search . " %i %-12:(+org-entry-category)")))
 
 #+END_SRC
+*** Pomodoro
+#+begin_src elisp
+(setq org-pomodoro-format "P: %s"
+      org-pomodoro-long-break-format "BREAK: %s"
+      org-pomodoro-short-break-format "break: %s"
+      org-pomodoro-play-sounds nil)
+#+end_src
 ** python
 #+BEGIN_SRC elisp
 (setq-hook! 'python-mode-hook +format-with-lsp t)
