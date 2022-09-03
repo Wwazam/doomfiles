@@ -44,7 +44,7 @@
 #+END_SRC
 ** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family "hack" :size 16))
+(setq doom-font (font-spec :family "hack" :size 18))
 #+end_src
 * Editor
 ** Evil
