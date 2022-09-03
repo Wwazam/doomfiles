@@ -136,6 +136,10 @@ Add dependencies to be able to execute code with =e= with lispy
         :n "<return>" #'symex-mode-interface)
   (lispy-mode))
 #+end_src
+*** save on buffer refresh
+#+begin_src elisp
+(setq cider-save-file-on-load t)
+#+end_src
 
 ** Org
 *** Variables
